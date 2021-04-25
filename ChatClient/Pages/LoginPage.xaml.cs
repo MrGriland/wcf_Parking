@@ -29,7 +29,11 @@ namespace ChatClient.Resources
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             mainWindow.ConnectUser();
-            mainWindow.LoadClientMainPage();
+            if(Tblogin!=null)
+                mainWindow.TryToLogin(Tblogin.Text, Tbpassword.Text);
+            mainWindow.login = Tblogin.Text;
+            if(mainWindow.isLogged)
+             mainWindow.LoadClientMainPage();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

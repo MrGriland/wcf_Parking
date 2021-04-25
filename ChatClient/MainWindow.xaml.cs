@@ -26,10 +26,11 @@ namespace ChatClient
     /// </summary>
     public partial class MainWindow : Window, IServiceChatCallback
     {
-        public OrderInfo orderInfo;
-        bool isConnected = false;
+        public string login;
+        public List<OrderInfo> orderInfos;
+        public bool isConnected = false;
+        public bool isLogged = false;
         ServiceChatClient client;
-        int ID;
         public MainWindow()
         {
             InitializeComponent();
@@ -64,7 +65,7 @@ namespace ChatClient
                     try
                     {
                         client = new ServiceChatClient(new System.ServiceModel.InstanceContext(this));
-                        ID = client.Connect("");
+                        client.Connect();
                     }
                     catch
                     {
@@ -72,17 +73,30 @@ namespace ChatClient
                         return;
                     }
                 }
+                UpdateData();
                 isConnected = true;
-                //UpdateData();
+            }
+        }
+        public void TryToLogin(string login, string password)
+        {
+            if (isConnected && client!=null)
+            {
+                if (client.TryLogin(login, password))
+                    isLogged = true;
+                else
+                    MessageBox.Show("Неверный логин или пароль", "Проверьте логин или пароль", MessageBoxButton.OK);
             }
         }
         public void DisconnectUser()
         {
+            isLogged = false;
+            login = null;
+            orderInfos = null;
             if (isConnected)
             {
                 try
                 {
-                    client.Disconnect(ID);
+                    client.Disconnect();
                 }
                 catch { }
                 client = null;
@@ -93,9 +107,9 @@ namespace ChatClient
         {
             try
             {
-                if (client != null)
+                if (client != null && login != null)
                 {
-                    client.SendMsg(ID);
+                    client.SendMsg(login);
                 }
             }
             catch { }
@@ -103,7 +117,14 @@ namespace ChatClient
 
         public void MsgCallback(string msg)
         {
-            orderInfo = JsonConvert.DeserializeObject<OrderInfo>(msg);
+            orderInfos = null;
+            orderInfos = JsonConvert.DeserializeObject<List<OrderInfo>>(msg);
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (isConnected)
+                DisconnectUser();
         }
     }
 }

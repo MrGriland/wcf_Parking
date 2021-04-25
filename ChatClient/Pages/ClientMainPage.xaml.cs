@@ -20,7 +20,7 @@ namespace ChatClient.Resources
     /// <summary>
     /// Логика взаимодействия для ClientMainPage.xaml
     /// </summary>
-    public partial class ClientMainPage : UserControl, IServiceChatCallback
+    public partial class ClientMainPage : UserControl
     {
         MainWindow mainWindow;
         public ClientMainPage(MainWindow mainWindow)
@@ -34,22 +34,30 @@ namespace ChatClient.Resources
             mainWindow.DisconnectUser();
             mainWindow.LoadBeginPage();
         }
-
-        public void MsgCallback(string msg)
-        {
-            OrderInfo orderInfo = JsonConvert.DeserializeObject<OrderInfo>(msg);
-            MainGrid.Items.Add(orderInfo);
-        }
-
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             mainWindow.DisconnectUser();
         }
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.UpdateData();
+            Update();
+        }
+        void Update()
+        {
             MainGrid.Items.Clear();
-            MainGrid.Items.Add(mainWindow.orderInfo);
+            mainWindow.UpdateData();
+            if (mainWindow.orderInfos != null)
+            {
+                    foreach (var oi in mainWindow.orderInfos)
+                        MainGrid.Items.Add(oi);
+                    
+            }
+            mainWindow.orderInfos = null;
+        }
+
+        private void ClientMainContol_Loaded(object sender, RoutedEventArgs e)
+        {
+            Update();
         }
     }
 }

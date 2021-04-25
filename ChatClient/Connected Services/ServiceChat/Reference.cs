@@ -16,22 +16,22 @@ namespace ChatClient.ServiceChat {
     public interface IServiceChat {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/Connect", ReplyAction="http://tempuri.org/IServiceChat/ConnectResponse")]
-        int Connect(string name);
+        void Connect();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/Connect", ReplyAction="http://tempuri.org/IServiceChat/ConnectResponse")]
-        System.Threading.Tasks.Task<int> ConnectAsync(string name);
+        System.Threading.Tasks.Task ConnectAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/Disconnect", ReplyAction="http://tempuri.org/IServiceChat/DisconnectResponse")]
-        void Disconnect(int id);
+        void Disconnect();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/Disconnect", ReplyAction="http://tempuri.org/IServiceChat/DisconnectResponse")]
-        System.Threading.Tasks.Task DisconnectAsync(int id);
+        System.Threading.Tasks.Task DisconnectAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceChat/SendMsg")]
-        void SendMsg(int id);
+        void SendMsg(string login);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceChat/SendMsg")]
-        System.Threading.Tasks.Task SendMsgAsync(int id);
+        System.Threading.Tasks.Task SendMsgAsync(string login);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/TryLogin", ReplyAction="http://tempuri.org/IServiceChat/TryLoginResponse")]
         bool TryLogin(string login, string password);
@@ -75,28 +75,28 @@ namespace ChatClient.ServiceChat {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public int Connect(string name) {
-            return base.Channel.Connect(name);
+        public void Connect() {
+            base.Channel.Connect();
         }
         
-        public System.Threading.Tasks.Task<int> ConnectAsync(string name) {
-            return base.Channel.ConnectAsync(name);
+        public System.Threading.Tasks.Task ConnectAsync() {
+            return base.Channel.ConnectAsync();
         }
         
-        public void Disconnect(int id) {
-            base.Channel.Disconnect(id);
+        public void Disconnect() {
+            base.Channel.Disconnect();
         }
         
-        public System.Threading.Tasks.Task DisconnectAsync(int id) {
-            return base.Channel.DisconnectAsync(id);
+        public System.Threading.Tasks.Task DisconnectAsync() {
+            return base.Channel.DisconnectAsync();
         }
         
-        public void SendMsg(int id) {
-            base.Channel.SendMsg(id);
+        public void SendMsg(string login) {
+            base.Channel.SendMsg(login);
         }
         
-        public System.Threading.Tasks.Task SendMsgAsync(int id) {
-            return base.Channel.SendMsgAsync(id);
+        public System.Threading.Tasks.Task SendMsgAsync(string login) {
+            return base.Channel.SendMsgAsync(login);
         }
         
         public bool TryLogin(string login, string password) {

@@ -18,9 +18,9 @@
             <materialDesign:PackIcon Kind="AccountArrowLeft" Width="25" Height="25" VerticalAlignment="Center"></materialDesign:PackIcon>
         </Button>
             <Label Content="Login" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Aquamarine" Margin="0,0,0,200"/>
-        <TextBox Height="35" Width="250" FontSize="20" CaretBrush="AliceBlue" Foreground="AliceBlue" BorderBrush="AliceBlue" HorizontalAlignment="Center" Margin="0,0,0,130"/>
-        <Label Content="Passsword" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Aquamarine" Margin="0,0,0,10"/>
-        <TextBox Height="35" Width="250" FontSize="20" CaretBrush="AliceBlue" Foreground="AliceBlue" BorderBrush="AliceBlue" HorizontalAlignment="Center" Margin="0,50,0,0"/>
+        <TextBox Name="Tblogin" Height="35" Width="250" FontSize="20" CaretBrush="AliceBlue" Foreground="AliceBlue" BorderBrush="AliceBlue" HorizontalAlignment="Center" Margin="0,0,0,130"/>
+        <Label Content="Password" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Aquamarine" Margin="0,0,0,10"/>
+        <TextBox Name="Tbpassword" Height="35" Width="250" FontSize="20" CaretBrush="AliceBlue" Foreground="AliceBlue" BorderBrush="AliceBlue" HorizontalAlignment="Center" Margin="0,50,0,0"/>
         <Button Name="LoginButton" Content="Login" Click="LoginButton_Click" VerticalAlignment="Center" Width="200" Height="50" Margin="0,170,0,0"/>
     </Grid>
 </UserControl>
