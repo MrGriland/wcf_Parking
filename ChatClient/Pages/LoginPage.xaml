@@ -11,7 +11,10 @@
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                 <GradientStop Color="Black"/>
-                <GradientStop Color="#FF131E2F" Offset="0.551"/>
+                <GradientStop Color="#FF0E2B5D" Offset="1"/>
+                <GradientStop Color="#FE070E18" Offset="0.276"/>
+                <GradientStop Color="#FE021026" Offset="0.532"/>
+                <GradientStop Color="#FE0A1E3D" Offset="0.776"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Button Name="BackButton" Click="BackButton_Click" Background="Aquamarine" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="57" Height="30">
@@ -20,7 +23,7 @@
             <Label Content="Login" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Aquamarine" Margin="0,0,0,200"/>
         <TextBox Name="Tblogin" Height="35" Width="250" FontSize="20" CaretBrush="AliceBlue" Foreground="AliceBlue" BorderBrush="AliceBlue" HorizontalAlignment="Center" Margin="0,0,0,130"/>
         <Label Content="Password" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Aquamarine" Margin="0,0,0,10"/>
-        <TextBox Name="Tbpassword" Height="35" Width="250" FontSize="20" CaretBrush="AliceBlue" Foreground="AliceBlue" BorderBrush="AliceBlue" HorizontalAlignment="Center" Margin="0,50,0,0"/>
-        <Button Name="LoginButton" Content="Login" Click="LoginButton_Click" VerticalAlignment="Center" Width="200" Height="50" Margin="0,170,0,0"/>
+        <PasswordBox  Name="Tbpassword" Height="35" Width="250" FontSize="20" CaretBrush="AliceBlue" Foreground="AliceBlue" BorderBrush="AliceBlue" HorizontalAlignment="Center" Margin="0,50,0,0"></PasswordBox>
+        <Button Name="LoginButton" Content="Login" Click="LoginButton_Click" VerticalAlignment="Center" Width="200" Height="50" Background="AliceBlue" Margin="0,170,0,0"/>
     </Grid>
 </UserControl>

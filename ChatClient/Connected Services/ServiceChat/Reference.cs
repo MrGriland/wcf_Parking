@@ -27,17 +27,53 @@ namespace ChatClient.ServiceChat {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/Disconnect", ReplyAction="http://tempuri.org/IServiceChat/DisconnectResponse")]
         System.Threading.Tasks.Task DisconnectAsync();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceChat/SendMsg")]
-        void SendMsg(string login);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/SendDB", ReplyAction="http://tempuri.org/IServiceChat/SendDBResponse")]
+        string SendDB(string login);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceChat/SendMsg")]
-        System.Threading.Tasks.Task SendMsgAsync(string login);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/SendDB", ReplyAction="http://tempuri.org/IServiceChat/SendDBResponse")]
+        System.Threading.Tasks.Task<string> SendDBAsync(string login);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/TryLogin", ReplyAction="http://tempuri.org/IServiceChat/TryLoginResponse")]
         bool TryLogin(string login, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/TryLogin", ReplyAction="http://tempuri.org/IServiceChat/TryLoginResponse")]
         System.Threading.Tasks.Task<bool> TryLoginAsync(string login, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/TryRegister", ReplyAction="http://tempuri.org/IServiceChat/TryRegisterResponse")]
+        bool TryRegister(string login, string password, string name, string surname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/TryRegister", ReplyAction="http://tempuri.org/IServiceChat/TryRegisterResponse")]
+        System.Threading.Tasks.Task<bool> TryRegisterAsync(string login, string password, string name, string surname);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/SendMarks", ReplyAction="http://tempuri.org/IServiceChat/SendMarksResponse")]
+        string SendMarks();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/SendMarks", ReplyAction="http://tempuri.org/IServiceChat/SendMarksResponse")]
+        System.Threading.Tasks.Task<string> SendMarksAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/SendModels", ReplyAction="http://tempuri.org/IServiceChat/SendModelsResponse")]
+        string SendModels(string mark);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/SendModels", ReplyAction="http://tempuri.org/IServiceChat/SendModelsResponse")]
+        System.Threading.Tasks.Task<string> SendModelsAsync(string mark);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/TryOrder", ReplyAction="http://tempuri.org/IServiceChat/TryOrderResponse")]
+        bool TryOrder(int transport, string number, int creator, string creationdate, string endingdate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/TryOrder", ReplyAction="http://tempuri.org/IServiceChat/TryOrderResponse")]
+        System.Threading.Tasks.Task<bool> TryOrderAsync(int transport, string number, int creator, string creationdate, string endingdate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/GetTransport", ReplyAction="http://tempuri.org/IServiceChat/GetTransportResponse")]
+        int GetTransport(string mark, string model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/GetTransport", ReplyAction="http://tempuri.org/IServiceChat/GetTransportResponse")]
+        System.Threading.Tasks.Task<int> GetTransportAsync(string mark, string model);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/GetUserID", ReplyAction="http://tempuri.org/IServiceChat/GetUserIDResponse")]
+        int GetUserID(string login);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/GetUserID", ReplyAction="http://tempuri.org/IServiceChat/GetUserIDResponse")]
+        System.Threading.Tasks.Task<int> GetUserIDAsync(string login);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -45,6 +81,12 @@ namespace ChatClient.ServiceChat {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceChat/MsgCallback")]
         void MsgCallback(string msg);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceChat/MarksCallback")]
+        void MarksCallback(string msg);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceChat/ModelsCallback")]
+        void ModelsCallback(string msg);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -91,12 +133,12 @@ namespace ChatClient.ServiceChat {
             return base.Channel.DisconnectAsync();
         }
         
-        public void SendMsg(string login) {
-            base.Channel.SendMsg(login);
+        public string SendDB(string login) {
+            return base.Channel.SendDB(login);
         }
         
-        public System.Threading.Tasks.Task SendMsgAsync(string login) {
-            return base.Channel.SendMsgAsync(login);
+        public System.Threading.Tasks.Task<string> SendDBAsync(string login) {
+            return base.Channel.SendDBAsync(login);
         }
         
         public bool TryLogin(string login, string password) {
@@ -105,6 +147,54 @@ namespace ChatClient.ServiceChat {
         
         public System.Threading.Tasks.Task<bool> TryLoginAsync(string login, string password) {
             return base.Channel.TryLoginAsync(login, password);
+        }
+        
+        public bool TryRegister(string login, string password, string name, string surname) {
+            return base.Channel.TryRegister(login, password, name, surname);
+        }
+        
+        public System.Threading.Tasks.Task<bool> TryRegisterAsync(string login, string password, string name, string surname) {
+            return base.Channel.TryRegisterAsync(login, password, name, surname);
+        }
+        
+        public string SendMarks() {
+            return base.Channel.SendMarks();
+        }
+        
+        public System.Threading.Tasks.Task<string> SendMarksAsync() {
+            return base.Channel.SendMarksAsync();
+        }
+        
+        public string SendModels(string mark) {
+            return base.Channel.SendModels(mark);
+        }
+        
+        public System.Threading.Tasks.Task<string> SendModelsAsync(string mark) {
+            return base.Channel.SendModelsAsync(mark);
+        }
+        
+        public bool TryOrder(int transport, string number, int creator, string creationdate, string endingdate) {
+            return base.Channel.TryOrder(transport, number, creator, creationdate, endingdate);
+        }
+        
+        public System.Threading.Tasks.Task<bool> TryOrderAsync(int transport, string number, int creator, string creationdate, string endingdate) {
+            return base.Channel.TryOrderAsync(transport, number, creator, creationdate, endingdate);
+        }
+        
+        public int GetTransport(string mark, string model) {
+            return base.Channel.GetTransport(mark, model);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetTransportAsync(string mark, string model) {
+            return base.Channel.GetTransportAsync(mark, model);
+        }
+        
+        public int GetUserID(string login) {
+            return base.Channel.GetUserID(login);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetUserIDAsync(string login) {
+            return base.Channel.GetUserIDAsync(login);
         }
     }
 }

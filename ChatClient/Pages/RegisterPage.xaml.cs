@@ -13,33 +13,29 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ChatClient.Resources
+namespace ChatClient.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для LoginPage.xaml
+    /// Логика взаимодействия для RegisterPage.xaml
     /// </summary>
-    public partial class LoginPage : UserControl
+    public partial class RegisterPage : UserControl
     {
         MainWindow mainWindow;
-        public LoginPage(MainWindow mainWindow)
+        public RegisterPage(MainWindow mainWindow)
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
-        }
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            mainWindow.ConnectUser();
-            if(Tblogin!=null)
-                mainWindow.TryToLogin(Tblogin.Text, Tbpassword.Password);
-            mainWindow.login = Tblogin.Text;
-            mainWindow.UserID = mainWindow.GetID();
-            if (mainWindow.isLogged)
-             mainWindow.LoadClientMainPage();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             mainWindow.LoadBeginPage();
+        }
+
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.ConnectUser();
+            mainWindow.TryToRegister(Tblogin.Text, Tbpassword.Text, TbName.Text, TbSurname.Text);
         }
     }
 }

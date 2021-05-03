@@ -18,6 +18,8 @@ using System.Windows.Shapes;
 using ChatClient.ServiceChat;
 using Newtonsoft.Json;
 using ChatClient.Resources;
+using ChatClient.Pages;
+using System.Text.RegularExpressions;
 
 namespace ChatClient
 {
@@ -27,7 +29,10 @@ namespace ChatClient
     public partial class MainWindow : Window, IServiceChatCallback
     {
         public string login;
-        public List<OrderInfo> orderInfos;
+        public int UserID;
+        public List<OrderInfo> orderInfos = null;
+        public List<string> marks = null;
+        public List<string> models = null;
         public bool isConnected = false;
         public bool isLogged = false;
         ServiceChatClient client;
@@ -46,6 +51,11 @@ namespace ChatClient
             MainGrid.Children.Clear();
             MainGrid.Children.Add(new LoginPage(this));
         }
+        public void LoadRegisterPage()
+        {
+            MainGrid.Children.Clear();
+            MainGrid.Children.Add(new RegisterPage(this));
+        }
         public void LoadBeginPage()
         {
             MainGrid.Children.Clear();
@@ -55,6 +65,12 @@ namespace ChatClient
         {
             MainGrid.Children.Clear();
             MainGrid.Children.Add(new ClientMainPage(this));
+        }
+        public void LoadClientAddOrderPage()
+        {
+            LoadMarks();
+            MainGrid.Children.Clear();
+            MainGrid.Children.Add(new AddOrderPage(this));
         }
         public void ConnectUser()
         {
@@ -82,9 +98,73 @@ namespace ChatClient
             if (isConnected && client!=null)
             {
                 if (client.TryLogin(login, password))
+                {
                     isLogged = true;
+                }
                 else
                     MessageBox.Show("Неверный логин или пароль", "Проверьте логин или пароль", MessageBoxButton.OK);
+            }
+        }
+        public void TryToRegister(string login, string password, string name, string surname)
+        {
+            if (isConnected && client != null && CheckLogin(login) && CheckPassword(password) && CheckName(name) && CheckSurname(surname))
+            {
+                if (client.TryRegister(login, password, name, surname))
+                    LoadBeginPage();
+                else
+                    MessageBox.Show("Возможно пользователь с таким логином уже зарегистрирован", "Не удалось зарегистрировать пользователя", MessageBoxButton.OK);
+            }
+        }
+        public bool CheckLogin(string login)
+        {
+            string pattern = @"\w{5,15}";
+            if (Regex.IsMatch(login, pattern, RegexOptions.IgnoreCase))
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Логин должен состоять от 5 до 15 символов, иметь буквы или цифры", "Неверный логин", MessageBoxButton.OK);
+                return false;
+            }
+        }
+        public bool CheckPassword(string password)
+        {
+            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$";
+            if (Regex.IsMatch(password, pattern, RegexOptions.IgnoreCase))
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Пароль должен состоять от 8 до 15 символов, иметь буквы и цифры", "Неверный пароль", MessageBoxButton.OK);
+                return false;
+            }
+        }
+        public bool CheckName(string name)
+        {
+            string pattern = @"^(?=.*[a-z])(?=.*[A-Z]).{1,30}$";
+            if (Regex.IsMatch(name, pattern, RegexOptions.IgnoreCase))
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Имя должно состоять от 1 до 30 символов, иметь буквы", "Неверное имя", MessageBoxButton.OK);
+                return false;
+            }
+        }
+        public bool CheckSurname(string surname)
+        {
+            string pattern = @"^(?=.*[a-z])(?=.*[A-Z]).{1,30}$";
+            if (Regex.IsMatch(surname, pattern, RegexOptions.IgnoreCase))
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Фамилия должна состоять от 1 до 30 символов, иметь буквы", "Неверная фамилия", MessageBoxButton.OK);
+                return false;
             }
         }
         public void DisconnectUser()
@@ -103,16 +183,18 @@ namespace ChatClient
                 isConnected = false;
             }
         }
-        public void UpdateData()
+        public string UpdateData()
         {
             try
             {
                 if (client != null && login != null)
                 {
-                    client.SendMsg(login);
+                    return client.SendDB(login);
                 }
+                else
+                    return "";
             }
-            catch { }
+            catch { return ""; }
         }
 
         public void MsgCallback(string msg)
@@ -126,5 +208,56 @@ namespace ChatClient
             if (isConnected)
                 DisconnectUser();
         }
+        public string LoadMarks()
+        {
+            if (isConnected && isLogged)
+                return client.SendMarks();
+            else
+                return "";
+        }
+        public string LoadModels(string mark)
+        {
+            if (isConnected && isLogged)
+                return client.SendModels(mark);
+            else
+                return "";
+        }
+        public int GetID()
+        {
+            if (isConnected && isLogged)
+                return client.GetUserID(login);
+            else
+                return 0;
+        }
+        public int GetTransportID(string mark, string model)
+        {
+            if (isConnected && isLogged)
+                return client.GetTransport(mark, model);
+            else
+                return 0;
+        }
+        public void TryToOrder(int transport, string number, int creator, string creationdate, string endingdate)
+        {
+            int i = 0;
+            if (isConnected && client != null)
+            {
+                if (client.TryOrder(transport, number, creator, creationdate, endingdate))
+                    //LoadClientMainPage();
+                    i++;
+                else
+                    MessageBox.Show("Возможно пользователь с таким логином уже зарегистрирован", "Не удалось зарегистрировать пользователя", MessageBoxButton.OK);
+            }
+        }
+        public void MarksCallback(string msg)
+        {
+            marks = null;
+            marks = JsonConvert.DeserializeObject<List<string>>(msg);
+        }
+        public void ModelsCallback(string msg)
+        {
+            models = null;
+            models = JsonConvert.DeserializeObject<List<string>>(msg);
+        }
+
     }
 }

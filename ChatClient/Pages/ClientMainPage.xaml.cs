@@ -44,20 +44,17 @@ namespace ChatClient.Resources
         }
         void Update()
         {
-            MainGrid.Items.Clear();
-            mainWindow.UpdateData();
-            if (mainWindow.orderInfos != null)
-            {
-                    foreach (var oi in mainWindow.orderInfos)
-                        MainGrid.Items.Add(oi);
-                    
-            }
-            mainWindow.orderInfos = null;
+            MainGrid.ItemsSource = JsonConvert.DeserializeObject<List<OrderInfo>>(mainWindow.UpdateData());
         }
 
         private void ClientMainContol_Loaded(object sender, RoutedEventArgs e)
         {
             Update();
+        }
+
+        private void AddOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.LoadClientAddOrderPage();
         }
     }
 }

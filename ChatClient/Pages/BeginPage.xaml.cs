@@ -31,5 +31,10 @@ namespace ChatClient.Resources
         {
             mainWindow.LoadLoginPage();
         }
+
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.LoadRegisterPage();
+        }
     }
 }
