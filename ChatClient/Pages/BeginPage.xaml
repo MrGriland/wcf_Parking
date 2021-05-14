@@ -9,9 +9,8 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                <GradientStop Color="#FF5B2871"/>
-                <GradientStop Color="#FF2B5DA8" Offset="0.462"/>
-                <GradientStop Color="#FF1A3765" Offset="1"/>
+                <GradientStop Color="Black"/>
+                <GradientStop Color="#FF131E2F" Offset="0.551"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Button Name="LoginButton" Content="Войти" Background="AliceBlue" Click="LoginButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="50" Margin="0,0,0,80"/>

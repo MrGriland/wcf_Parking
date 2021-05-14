@@ -52,14 +52,16 @@ namespace ChatClient.Pages
 
         private void OrderButton_Click(object sender, RoutedEventArgs e)
         {
-            TB1.Text = BTime.Text;
             if (CheckDate())
             {
                 string number = FPNumber.Text + SPNumber.Text + "-" + TPNumber.Text;
                 bdate = BDate.Text + " " + BTime.Text;
                 edate = Date.Text + " " + Time.Text;
-                DateTime rounded = new DateTime(((DateTime.Now.Ticks + 360000000) / 600000000) * 600000000);
-                mainWindow.TryToOrder(Transport, number, mainWindow.UserID, bdate, edate);
+                //DateTime rounded = new DateTime(((DateTime.Now.Ticks + 360000000) / 600000000) * 600000000);
+                if(mainWindow.GetFreeCount() > 0)
+                    mainWindow.TryToOrder(Transport, number, mainWindow.UserID, bdate, edate);
+                else
+                    MessageBox.Show("Подождите пожалуйста освобождения мест на парковке", "Нету свободных мест", MessageBoxButton.OK);
             }
         }
 
@@ -114,7 +116,7 @@ namespace ChatClient.Pages
             string pattern1 = @"\d{4}";
             if (Regex.IsMatch(FPNumber.Text, pattern1, RegexOptions.IgnoreCase))
             {
-                string pattern2 = @"^(?=.*[A-Z]).{2}$";
+                string pattern2 = @"^[A-Z]{2}$";
                 if (Regex.IsMatch(SPNumber.Text, pattern2, RegexOptions.IgnoreCase))
                 {
                     string pattern3 = @"\d{1}";
@@ -150,7 +152,23 @@ namespace ChatClient.Pages
                     {
                         if (Time.Text != "")
                         {
-                            return true;
+                            if((Convert.ToDateTime(BDate.Text + " " + BTime.Text) - DateTime.Now).TotalMinutes > 0)
+                            {
+                                if ((Convert.ToDateTime(Date.Text + " " + Time.Text) - Convert.ToDateTime(BDate.Text + " " + BTime.Text)).TotalMinutes > 0)
+                                {
+                                    return true;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Вы не можете выехать раньше чем заехать", "Неправильная дата", MessageBoxButton.OK);
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Вам необходимо выбрать дату или время не из прошлого", "Неправильная дата", MessageBoxButton.OK);
+                                return false;
+                            }
                         }
                         else
                         {
@@ -175,6 +193,11 @@ namespace ChatClient.Pages
                 MessageBox.Show("Выберите дату заезда", "Неправильная дата", MessageBoxButton.OK);
                 return false;
             }
+        }
+
+        private void NotificationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.LoadClientNotificationsPage();
         }
     }
 }

@@ -80,6 +80,18 @@
   <wsdl:message name="IServiceParking_GetCount_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCountResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceParking_SendNotifications_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendNotifications" />
+  </wsdl:message>
+  <wsdl:message name="IServiceParking_SendNotifications_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendNotificationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceParking_ClearNotification_InputMessage">
+    <wsdl:part name="parameters" element="tns:ClearNotification" />
+  </wsdl:message>
+  <wsdl:message name="IServiceParking_ClearNotification_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ClearNotificationResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceParking_MsgCallback_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:MsgCallback" />
   </wsdl:message>
@@ -133,6 +145,14 @@
     <wsdl:operation name="GetCount">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceParking/GetCount" message="tns:IServiceParking_GetCount_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceParking/GetCountResponse" message="tns:IServiceParking_GetCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendNotifications">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceParking/SendNotifications" message="tns:IServiceParking_SendNotifications_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceParking/SendNotificationsResponse" message="tns:IServiceParking_SendNotifications_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ClearNotification">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceParking/ClearNotification" message="tns:IServiceParking_ClearNotification_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceParking/ClearNotificationResponse" message="tns:IServiceParking_ClearNotification_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="MsgCallback">
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceParking/MsgCallback" message="tns:IServiceParking_MsgCallback_OutputCallbackMessage" />
@@ -239,6 +259,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetCount">
       <soap12:operation soapAction="http://tempuri.org/IServiceParking/GetCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendNotifications">
+      <soap12:operation soapAction="http://tempuri.org/IServiceParking/SendNotifications" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearNotification">
+      <soap12:operation soapAction="http://tempuri.org/IServiceParking/ClearNotification" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

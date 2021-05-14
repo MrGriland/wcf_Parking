@@ -1,4 +1,5 @@
-﻿using ChatClient.ServiceParking;
+﻿using ChatClient.Pages;
+using ChatClient.ServiceParking;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -110,6 +111,15 @@ namespace ChatClient.Resources
             }
             MainGridNotConfirmed.ItemsSource = searchnotconfirmedorders;
             Payment.Content = "Итого к оплате: " + PaySumSearched();
+        }
+        private void NotificationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.LoadClientNotificationsPage();
+        }
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            mainWindow.MainGrid.Children.Clear();
+            mainWindow.MainGrid.Children.Add(new EditConfirmedPageClient(sender, mainWindow));
         }
     }
 }

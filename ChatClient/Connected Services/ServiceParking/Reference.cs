@@ -80,6 +80,18 @@ namespace ChatClient.ServiceParking {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/GetCount", ReplyAction="http://tempuri.org/IServiceParking/GetCountResponse")]
         System.Threading.Tasks.Task<int> GetCountAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/SendNotifications", ReplyAction="http://tempuri.org/IServiceParking/SendNotificationsResponse")]
+        string SendNotifications(string login);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/SendNotifications", ReplyAction="http://tempuri.org/IServiceParking/SendNotificationsResponse")]
+        System.Threading.Tasks.Task<string> SendNotificationsAsync(string login);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/ClearNotification", ReplyAction="http://tempuri.org/IServiceParking/ClearNotificationResponse")]
+        bool ClearNotification(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/ClearNotification", ReplyAction="http://tempuri.org/IServiceParking/ClearNotificationResponse")]
+        System.Threading.Tasks.Task<bool> ClearNotificationAsync(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -209,6 +221,22 @@ namespace ChatClient.ServiceParking {
         
         public System.Threading.Tasks.Task<int> GetCountAsync() {
             return base.Channel.GetCountAsync();
+        }
+        
+        public string SendNotifications(string login) {
+            return base.Channel.SendNotifications(login);
+        }
+        
+        public System.Threading.Tasks.Task<string> SendNotificationsAsync(string login) {
+            return base.Channel.SendNotificationsAsync(login);
+        }
+        
+        public bool ClearNotification(int id) {
+            return base.Channel.ClearNotification(id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ClearNotificationAsync(int id) {
+            return base.Channel.ClearNotificationAsync(id);
         }
     }
 }

@@ -74,6 +74,11 @@ namespace ChatClient
             MainGrid.Children.Clear();
             MainGrid.Children.Add(new AddOrderPage(this));
         }
+        public void LoadClientNotificationsPage()
+        {
+            MainGrid.Children.Clear();
+            MainGrid.Children.Add(new NotificationsPage(this));
+        }
         public void ConnectUser()
         {
             if (!isConnected)
@@ -145,27 +150,27 @@ namespace ChatClient
         }
         public bool CheckName(string name)
         {
-            string pattern = @"^(?=.*[а-я])(?=.*[А-Я]).{1,30}$";
+            string pattern = @"^[А-Яа-я]{2,30}$";
             if (Regex.IsMatch(name, pattern, RegexOptions.IgnoreCase))
             {
                 return true;
             }
             else
             {
-                MessageBox.Show("Имя должно состоять от 1 до 30 символов, иметь буквы", "Неверное имя", MessageBoxButton.OK);
+                MessageBox.Show("Имя должно состоять от 2 до 30 символов, иметь буквы", "Неверное имя", MessageBoxButton.OK);
                 return false;
             }
         }
         public bool CheckSurname(string surname)
         {
-            string pattern = @"^(?=.*[а-я])(?=.*[А-Я]).{1,30}$";
+            string pattern = @"^[А-Яа-я]{2,30}$";
             if (Regex.IsMatch(surname, pattern, RegexOptions.IgnoreCase))
             {
                 return true;
             }
             else
             {
-                MessageBox.Show("Фамилия должна состоять от 1 до 30 символов, иметь буквы", "Неверная фамилия", MessageBoxButton.OK);
+                MessageBox.Show("Фамилия должна состоять от 2 до 30 символов, иметь буквы", "Неверная фамилия", MessageBoxButton.OK);
                 return false;
             }
         }
@@ -211,10 +216,14 @@ namespace ChatClient
         }
         public string LoadMarks()
         {
-            if (isConnected && isLogged)
-                return client.SendMarks();
-            else
-                return "";
+            try
+            {
+                if (isConnected && isLogged)
+                    return client.SendMarks();
+                else
+                    return "";
+            }
+            catch { return ""; }
         }
         public string LoadModels(string mark)
         {
@@ -269,6 +278,24 @@ namespace ChatClient
                 return client.GetCount();
             else
                 return 0;
+        }
+        public string GetNotifications(string login)
+        {
+            if (isConnected && isLogged)
+                return client.SendNotifications(login);
+            else
+                return "";
+        }
+        public bool ClearThisNotification(int id)
+        {
+            try
+            {
+                if (isConnected && isLogged)
+                    return client.ClearNotification(id);
+                else
+                    return false;
+            }
+            catch { return false; }
         }
     }
 }
