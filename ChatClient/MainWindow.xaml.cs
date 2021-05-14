@@ -15,19 +15,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ChatClient.ServiceChat;
+using ChatClient.ServiceParking;
 using Newtonsoft.Json;
 using ChatClient.Resources;
 using ChatClient.Pages;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography;
 
 namespace ChatClient
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IServiceChatCallback
+    public partial class MainWindow : Window, IServiceParkingCallback
     {
+        public string freec;
         public string login;
         public int UserID;
         public List<OrderInfo> orderInfos = null;
@@ -35,7 +37,7 @@ namespace ChatClient
         public List<string> models = null;
         public bool isConnected = false;
         public bool isLogged = false;
-        ServiceChatClient client;
+        ServiceParkingClient client;
         public MainWindow()
         {
             InitializeComponent();
@@ -80,7 +82,7 @@ namespace ChatClient
                 {
                     try
                     {
-                        client = new ServiceChatClient(new System.ServiceModel.InstanceContext(this));
+                        client = new ServiceParkingClient(new System.ServiceModel.InstanceContext(this));
                         client.Connect();
                     }
                     catch
@@ -97,7 +99,7 @@ namespace ChatClient
         {
             if (isConnected && client!=null)
             {
-                if (client.TryLogin(login, password))
+                if (client.TryLogin(login, GetHash(password)))
                 {
                     isLogged = true;
                 }
@@ -109,7 +111,7 @@ namespace ChatClient
         {
             if (isConnected && client != null && CheckLogin(login) && CheckPassword(password) && CheckName(name) && CheckSurname(surname))
             {
-                if (client.TryRegister(login, password, name, surname))
+                if (client.TryRegister(login, GetHash(password), name, surname))
                     LoadBeginPage();
                 else
                     MessageBox.Show("Возможно пользователь с таким логином уже зарегистрирован", "Не удалось зарегистрировать пользователя", MessageBoxButton.OK);
@@ -143,7 +145,7 @@ namespace ChatClient
         }
         public bool CheckName(string name)
         {
-            string pattern = @"^(?=.*[a-z])(?=.*[A-Z]).{1,30}$";
+            string pattern = @"^(?=.*[а-я])(?=.*[А-Я]).{1,30}$";
             if (Regex.IsMatch(name, pattern, RegexOptions.IgnoreCase))
             {
                 return true;
@@ -156,7 +158,7 @@ namespace ChatClient
         }
         public bool CheckSurname(string surname)
         {
-            string pattern = @"^(?=.*[a-z])(?=.*[A-Z]).{1,30}$";
+            string pattern = @"^(?=.*[а-я])(?=.*[А-Я]).{1,30}$";
             if (Regex.IsMatch(surname, pattern, RegexOptions.IgnoreCase))
             {
                 return true;
@@ -199,8 +201,7 @@ namespace ChatClient
 
         public void MsgCallback(string msg)
         {
-            orderInfos = null;
-            orderInfos = JsonConvert.DeserializeObject<List<OrderInfo>>(msg);
+            freec = msg;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -238,14 +239,12 @@ namespace ChatClient
         }
         public void TryToOrder(int transport, string number, int creator, string creationdate, string endingdate)
         {
-            int i = 0;
             if (isConnected && client != null)
             {
                 if (client.TryOrder(transport, number, creator, creationdate, endingdate))
-                    //LoadClientMainPage();
-                    i++;
+                    LoadClientMainPage();
                 else
-                    MessageBox.Show("Возможно пользователь с таким логином уже зарегистрирован", "Не удалось зарегистрировать пользователя", MessageBoxButton.OK);
+                    MessageBox.Show("Возможно автомобиль с таким номером уже на парковке", "Не удалось забронировать", MessageBoxButton.OK);
             }
         }
         public void MarksCallback(string msg)
@@ -258,6 +257,18 @@ namespace ChatClient
             models = null;
             models = JsonConvert.DeserializeObject<List<string>>(msg);
         }
-
+        public string GetHash(string input)
+        {
+            var md5 = MD5.Create();
+            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
+            return Convert.ToBase64String(hash);
+        }
+        public int GetFreeCount()
+        {
+            if (isConnected && isLogged)
+                return client.GetCount();
+            else
+                return 0;
+        }
     }
 }

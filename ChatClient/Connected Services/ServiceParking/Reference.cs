@@ -8,112 +8,118 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ChatClient.ServiceChat {
+namespace ChatClient.ServiceParking {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceChat.IServiceChat", CallbackContract=typeof(ChatClient.ServiceChat.IServiceChatCallback))]
-    public interface IServiceChat {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceParking.IServiceParking", CallbackContract=typeof(ChatClient.ServiceParking.IServiceParkingCallback))]
+    public interface IServiceParking {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/Connect", ReplyAction="http://tempuri.org/IServiceChat/ConnectResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/Connect", ReplyAction="http://tempuri.org/IServiceParking/ConnectResponse")]
         void Connect();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/Connect", ReplyAction="http://tempuri.org/IServiceChat/ConnectResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/Connect", ReplyAction="http://tempuri.org/IServiceParking/ConnectResponse")]
         System.Threading.Tasks.Task ConnectAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/Disconnect", ReplyAction="http://tempuri.org/IServiceChat/DisconnectResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/Disconnect", ReplyAction="http://tempuri.org/IServiceParking/DisconnectResponse")]
         void Disconnect();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/Disconnect", ReplyAction="http://tempuri.org/IServiceChat/DisconnectResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/Disconnect", ReplyAction="http://tempuri.org/IServiceParking/DisconnectResponse")]
         System.Threading.Tasks.Task DisconnectAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/SendDB", ReplyAction="http://tempuri.org/IServiceChat/SendDBResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/SendDB", ReplyAction="http://tempuri.org/IServiceParking/SendDBResponse")]
         string SendDB(string login);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/SendDB", ReplyAction="http://tempuri.org/IServiceChat/SendDBResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/SendDB", ReplyAction="http://tempuri.org/IServiceParking/SendDBResponse")]
         System.Threading.Tasks.Task<string> SendDBAsync(string login);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/TryLogin", ReplyAction="http://tempuri.org/IServiceChat/TryLoginResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/TryLogin", ReplyAction="http://tempuri.org/IServiceParking/TryLoginResponse")]
         bool TryLogin(string login, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/TryLogin", ReplyAction="http://tempuri.org/IServiceChat/TryLoginResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/TryLogin", ReplyAction="http://tempuri.org/IServiceParking/TryLoginResponse")]
         System.Threading.Tasks.Task<bool> TryLoginAsync(string login, string password);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/TryRegister", ReplyAction="http://tempuri.org/IServiceChat/TryRegisterResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/TryRegister", ReplyAction="http://tempuri.org/IServiceParking/TryRegisterResponse")]
         bool TryRegister(string login, string password, string name, string surname);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/TryRegister", ReplyAction="http://tempuri.org/IServiceChat/TryRegisterResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/TryRegister", ReplyAction="http://tempuri.org/IServiceParking/TryRegisterResponse")]
         System.Threading.Tasks.Task<bool> TryRegisterAsync(string login, string password, string name, string surname);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/SendMarks", ReplyAction="http://tempuri.org/IServiceChat/SendMarksResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/SendMarks", ReplyAction="http://tempuri.org/IServiceParking/SendMarksResponse")]
         string SendMarks();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/SendMarks", ReplyAction="http://tempuri.org/IServiceChat/SendMarksResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/SendMarks", ReplyAction="http://tempuri.org/IServiceParking/SendMarksResponse")]
         System.Threading.Tasks.Task<string> SendMarksAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/SendModels", ReplyAction="http://tempuri.org/IServiceChat/SendModelsResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/SendModels", ReplyAction="http://tempuri.org/IServiceParking/SendModelsResponse")]
         string SendModels(string mark);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/SendModels", ReplyAction="http://tempuri.org/IServiceChat/SendModelsResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/SendModels", ReplyAction="http://tempuri.org/IServiceParking/SendModelsResponse")]
         System.Threading.Tasks.Task<string> SendModelsAsync(string mark);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/TryOrder", ReplyAction="http://tempuri.org/IServiceChat/TryOrderResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/TryOrder", ReplyAction="http://tempuri.org/IServiceParking/TryOrderResponse")]
         bool TryOrder(int transport, string number, int creator, string creationdate, string endingdate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/TryOrder", ReplyAction="http://tempuri.org/IServiceChat/TryOrderResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/TryOrder", ReplyAction="http://tempuri.org/IServiceParking/TryOrderResponse")]
         System.Threading.Tasks.Task<bool> TryOrderAsync(int transport, string number, int creator, string creationdate, string endingdate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/GetTransport", ReplyAction="http://tempuri.org/IServiceChat/GetTransportResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/GetTransport", ReplyAction="http://tempuri.org/IServiceParking/GetTransportResponse")]
         int GetTransport(string mark, string model);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/GetTransport", ReplyAction="http://tempuri.org/IServiceChat/GetTransportResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/GetTransport", ReplyAction="http://tempuri.org/IServiceParking/GetTransportResponse")]
         System.Threading.Tasks.Task<int> GetTransportAsync(string mark, string model);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/GetUserID", ReplyAction="http://tempuri.org/IServiceChat/GetUserIDResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/GetUserID", ReplyAction="http://tempuri.org/IServiceParking/GetUserIDResponse")]
         int GetUserID(string login);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceChat/GetUserID", ReplyAction="http://tempuri.org/IServiceChat/GetUserIDResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/GetUserID", ReplyAction="http://tempuri.org/IServiceParking/GetUserIDResponse")]
         System.Threading.Tasks.Task<int> GetUserIDAsync(string login);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/GetCount", ReplyAction="http://tempuri.org/IServiceParking/GetCountResponse")]
+        int GetCount();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/GetCount", ReplyAction="http://tempuri.org/IServiceParking/GetCountResponse")]
+        System.Threading.Tasks.Task<int> GetCountAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceChatCallback {
+    public interface IServiceParkingCallback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceChat/MsgCallback")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceParking/MsgCallback")]
         void MsgCallback(string msg);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceChat/MarksCallback")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceParking/MarksCallback")]
         void MarksCallback(string msg);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceChat/ModelsCallback")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IServiceParking/ModelsCallback")]
         void ModelsCallback(string msg);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IServiceChatChannel : ChatClient.ServiceChat.IServiceChat, System.ServiceModel.IClientChannel {
+    public interface IServiceParkingChannel : ChatClient.ServiceParking.IServiceParking, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ServiceChatClient : System.ServiceModel.DuplexClientBase<ChatClient.ServiceChat.IServiceChat>, ChatClient.ServiceChat.IServiceChat {
+    public partial class ServiceParkingClient : System.ServiceModel.DuplexClientBase<ChatClient.ServiceParking.IServiceParking>, ChatClient.ServiceParking.IServiceParking {
         
-        public ServiceChatClient(System.ServiceModel.InstanceContext callbackInstance) : 
+        public ServiceParkingClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
         }
         
-        public ServiceChatClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+        public ServiceParkingClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
                 base(callbackInstance, endpointConfigurationName) {
         }
         
-        public ServiceChatClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+        public ServiceParkingClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
                 base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceChatClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ServiceParkingClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public ServiceChatClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ServiceParkingClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(callbackInstance, binding, remoteAddress) {
         }
         
@@ -195,6 +201,14 @@ namespace ChatClient.ServiceChat {
         
         public System.Threading.Tasks.Task<int> GetUserIDAsync(string login) {
             return base.Channel.GetUserIDAsync(login);
+        }
+        
+        public int GetCount() {
+            return base.Channel.GetCount();
+        }
+        
+        public System.Threading.Tasks.Task<int> GetCountAsync() {
+            return base.Channel.GetCountAsync();
         }
     }
 }

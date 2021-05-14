@@ -9,41 +9,80 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                <GradientStop Color="#FF5B2871"/>
-                <GradientStop Color="#FF2B5DA8" Offset="0.462"/>
-                <GradientStop Color="#FF1A3765" Offset="1"/>
+                <GradientStop Color="Black"/>
+                <GradientStop Color="#FF131E2F" Offset="0.551"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Grid Margin="0,0,0,403.6">
-            <Button Name="HomeButton" Background="Aquamarine" Click="HomeButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="29">
+        <Grid HorizontalAlignment="Left" Width="200" Background="#FF399393">
+            <StackPanel>
+                <Label Name="LoginInfo" FontSize="15" Content="" HorizontalAlignment="Center" Margin="0 10 0 0" VerticalAlignment="Top"></Label>
+                <Label Name="CountInfo" FontSize="20"  Content="" HorizontalAlignment="Center"  Margin="0 10 0 0" VerticalAlignment="Top"></Label>
+            </StackPanel>
+            <Button Name="MainButton" Background="#FF399393" Click="MainButton_Click" Height="50"  Margin="0 0 0 150" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="Home" Width="25" Height="25" Margin="0,0,5,0 " VerticalAlignment="Center"></materialDesign:PackIcon>
-                    <TextBlock Text="Home"/>
+                    <materialDesign:PackIcon Kind="House" Width="25" Height="25" Margin="0,0,5,0 " VerticalAlignment="Center"></materialDesign:PackIcon>
+                    <TextBlock VerticalAlignment="Center" Text="Главная"/>
                 </StackPanel>
             </Button>
-            <Button Name="LogOutButton" Background="Aquamarine" Click="LogOutButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0" Height="29">
+            <Button Name="AddOrderButton" Background="#FF246868" Height="50" Margin="0 0 0 50" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="PlusBox" Width="25" Height="25" Margin="0,0,5,0 " VerticalAlignment="Center"></materialDesign:PackIcon>
+                    <TextBlock VerticalAlignment="Center" Text="Забронировать"/>
+                </StackPanel>
+            </Button>
+            <Button Name="NotificationsButton" Background="#FF399393" Height="50" Margin="0 50 0 0" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Bell" Width="25" Height="25" Margin="0,0,5,0 " VerticalAlignment="Center"></materialDesign:PackIcon>
+                    <TextBlock VerticalAlignment="Center" Text="Уведомления"/>
+                </StackPanel>
+            </Button>
+            <Button Name="LogOutButton" Background="#FF399393" Click="LogOutButton_Click" VerticalAlignment="Center" Margin="0,150,0,0" Height="50">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="Logout" Width="25" Height="25" Margin="0,0,5,0 " VerticalAlignment="Center"></materialDesign:PackIcon>
-                    <TextBlock Text="Logout"/>
+                    <TextBlock VerticalAlignment="Center" Text="Выйти"/>
                 </StackPanel>
             </Button>
         </Grid>
-        <Grid Margin="0,46,0,0">
-            <Label Content="Марка" FontSize="21px" Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,370"></Label>
-            <ComboBox Name="MarkComboBox" FontSize="21px" HorizontalContentAlignment="Center" SelectionChanged="MarkComboBox_SelectionChanged" Background="AliceBlue" HorizontalAlignment="Center" Margin="0,0,0,300" VerticalAlignment="Center" MinWidth="124"/>
-            <Label Content="Модель" FontSize="21px" Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,220"></Label>
-            <ComboBox Name="ModelComboBox" FontSize="21px" HorizontalContentAlignment="Center" SelectionChanged="ModelComboBox_SelectionChanged" IsEnabled="False" Background="AliceBlue" HorizontalAlignment="Center" Margin="0,0,0,150" VerticalAlignment="Center" MinWidth="124"/>
-            <Label Content="Номер авто" FontSize="21px" Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,70"></Label>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBox Name="FPNumber" Width="50" FontSize="21px" HorizontalContentAlignment="Center" MaxLength="4" Background="AliceBlue" BorderBrush="Aqua" BorderThickness="1"/>
-                <TextBox Name="SPNumber" Width="30" FontSize="21px" CharacterCasing="Upper" HorizontalContentAlignment="Center" MaxLength="2" Margin="10,0,0,0" Background="AliceBlue" BorderBrush="Aqua" BorderThickness="1"/>
-                <Label Content="-"  FontSize="21px" HorizontalContentAlignment="Center" Foreground="AliceBlue"/>
-                <TextBox Name="TPNumber" Width="19" FontSize="21px" SelectionBrush="AliceBlue" HorizontalContentAlignment="Center" MaxLength="1" Margin="0,0,0,0" Background="AliceBlue" BorderBrush="Aqua" BorderThickness="1"/>
-            </StackPanel>
-            <Label Content="Дата и время окончания стоянки" FontSize="21px" Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,130"></Label>
-            <DatePicker Name="Date" HorizontalContentAlignment="Center" FontSize="21px" BorderBrush="AliceBlue" IsTodayHighlighted="True" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,100" Width="124"></DatePicker>
-            <materialDesign:TimePicker Name="Time" HorizontalContentAlignment="Center" FontSize="21px" BorderBrush="AliceBlue" Is24Hours="True" HorizontalAlignment="Center" Margin="0,0,0,60" VerticalAlignment="Bottom" Width="124"/>
-            <Button Name="OrderButton" Content="Заказать" Click="OrderButton_Click" Background="AliceBlue" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,10" />
+        <Grid Margin="200,0,0,0">
+            <Grid Name="FPage" Height="400" Width="300">
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1C454B" Offset="0.026"/>
+                        <GradientStop Color="#FF275A3F" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Label Name="Markl" Content="Марка" FontSize="21px" Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,200"></Label>
+                <ComboBox Name="MarkComboBox" FontSize="21px" HorizontalContentAlignment="Center" SelectionChanged="MarkComboBox_SelectionChanged" Background="AliceBlue" HorizontalAlignment="Center" Margin="0,0,0,120" VerticalAlignment="Center" Width="250"/>
+                <Label Name="Modell" Content="Модель" FontSize="21px" Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,30"></Label>
+                <ComboBox Name="ModelComboBox" FontSize="21px" HorizontalContentAlignment="Center" SelectionChanged="ModelComboBox_SelectionChanged" IsEnabled="False" Background="AliceBlue" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Center" Width="250"/>
+                <Label Name="Numberl" Content="Номер авто" FontSize="21px" Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,120,0,0"></Label>
+                <StackPanel Name="NumberP" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 200 0 0">
+                    <TextBox Name="FPNumber" Width="70" FontSize="21px" HorizontalContentAlignment="Center" MaxLength="4" Background="AliceBlue" BorderBrush="Aqua" BorderThickness="1"/>
+                    <TextBox Name="SPNumber" Width="50" FontSize="21px" CharacterCasing="Upper" HorizontalContentAlignment="Center" MaxLength="2" Margin="10,0,0,0" Background="AliceBlue" BorderBrush="Aqua" BorderThickness="1"/>
+                    <Label Content="-"  FontSize="21px" HorizontalContentAlignment="Center" Foreground="AliceBlue"/>
+                    <TextBox Name="TPNumber" Width="25" FontSize="21px" SelectionBrush="AliceBlue" HorizontalContentAlignment="Center" MaxLength="1" Margin="0,0,0,0" Background="AliceBlue" BorderBrush="Aqua" BorderThickness="1"/>
+                </StackPanel>
+                <Button Name="NextButton" Content="Далее" Click="NextButton_Click" Background="AliceBlue" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,330,0,0" />
+            </Grid>
+            <Grid Name="SPage" Visibility="Collapsed" Height="400" Width="400">
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF1C454B" Offset="0.026"/>
+                        <GradientStop Color="#FF275A3F" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Label Name="BDatel" Content="Дата и время заезда на стоянку" FontSize="21px" Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,200"></Label>
+                <DatePicker Name="BDate" HorizontalContentAlignment="Center" FontSize="21px" BorderBrush="AliceBlue" IsTodayHighlighted="True" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,130" Width="124"></DatePicker>
+                <materialDesign:TimePicker Name="BTime" HorizontalContentAlignment="Center" FontSize="21px" BorderBrush="AliceBlue" Is24Hours="True" HorizontalAlignment="Center" Margin="0,0,0,30" VerticalAlignment="Center" Width="124"/>
+                <Label Name="Datel" Content="Дата и время окончания стоянки" FontSize="21px" Foreground="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,70,0,0"></Label>
+                <DatePicker Name="Date" HorizontalContentAlignment="Center" FontSize="21px" BorderBrush="AliceBlue" IsTodayHighlighted="True" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,140,0,0" Width="124"></DatePicker>
+                <materialDesign:TimePicker Name="Time" HorizontalContentAlignment="Center" FontSize="21px" BorderBrush="AliceBlue" Is24Hours="True" HorizontalAlignment="Center" Margin="0,240,0,0" VerticalAlignment="Center" Width="124"/>
+                <StackPanel Name="ButtonSP" Orientation="Horizontal"  VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,350,0,10">
+                    <Button Name="BackButton" Content="Назад" Click="BackButton_Click" Background="AliceBlue" Margin="0 0 20 0" />
+                    <Button Name="OrderButton" Content="Заказать" Click="OrderButton_Click" Background="AliceBlue" Margin="20 0 0 0"/>
+                </StackPanel>
+            </Grid>
+            <TextBox Name="TB1" HorizontalAlignment="Left" Height="23" Margin="500,180,-20,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         </Grid>
     </Grid>
 </UserControl>
