@@ -13,7 +13,7 @@
                 <GradientStop Color="#FF131E2F" Offset="0.551"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Button Name="LoginButton" Content="Войти" Background="AliceBlue" Click="LoginButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="50" Margin="0,0,0,80"/>
-        <Button Name="RegisterButton" Content="Регистрация" Background="AliceBlue" Click="RegisterButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="50" Margin="0,80,0,0"/>
+        <Button Name="LoginButton" Content="Войти" Background="#FF399393" Click="LoginButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="50" Margin="0,0,0,80"/>
+        <Button Name="RegisterButton" Content="Регистрация" Background="#FF399393" Click="RegisterButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="50" Margin="0,80,0,0"/>
     </Grid>
 </UserControl>

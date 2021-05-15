@@ -71,6 +71,7 @@
                 <DataGrid.RowStyle>
                     <Style TargetType="{x:Type DataGridRow}">
                         <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                        <Setter Property="Height" Value="30"></Setter>
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>
@@ -80,47 +81,89 @@
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
+                        <DataGridTextColumn.CellStyle>
+                            <Style>
+                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
+                                <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
                     <DataGridTextColumn Header="Модель" Binding="{Binding OrderInfo_TransportModel}" Width="*">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
+                        <DataGridTextColumn.CellStyle>
+                            <Style>
+                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
+                                <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
                     <DataGridTextColumn Header="Номер авто" Binding="{Binding OrderInfo_Number}"  Width="1.5*">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
+                        <DataGridTextColumn.CellStyle>
+                            <Style>
+                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
+                                <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
                 <DataGridTextColumn Header="Время создания" Binding="{Binding OrderInfo_CreationDate}"  Width="2*">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
+                        <DataGridTextColumn.CellStyle>
+                            <Style>
+                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
+                                <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
                 <DataGridTextColumn Header="Срок истечения" Binding="{Binding OrderInfo_EndingDate}" Width="2*">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center" />
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
-                </DataGridTextColumn>
+                        <DataGridTextColumn.CellStyle>
+                            <Style>
+                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
+                                <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
                     <DataGridTextColumn Header="Сумма" Binding="{Binding OrderInfo_Sum}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
                                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.CellStyle>
+                            <Style>
+                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
+                                <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
                 </DataGrid.Columns>
         </DataGrid>
             <Label Grid.Row="2" Name="Payment" Background="#FFB6B6B8" Content="Итого к оплате:" VerticalAlignment="Center" HorizontalContentAlignment="Right" FontWeight="Bold"></Label>
             <Label Grid.Row="3" Background="#FF399393" Content="Незарегистрированная бронь" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold"/>
             <DataGrid Grid.Row="4" x:Name="MainGridNotConfirmed" AutoGenerateColumns="False" IsReadOnly="True" Foreground="Black">
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                        <Setter Property="Height" Value="30"></Setter>
+                    </Style>
+                </DataGrid.RowStyle>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Марка" Binding="{Binding OrderInfo_TransportMark}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
@@ -128,6 +171,12 @@
                                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.CellStyle>
+                            <Style>
+                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
+                                <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Модель" Binding="{Binding OrderInfo_TransportModel}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
@@ -135,6 +184,12 @@
                                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.CellStyle>
+                            <Style>
+                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
+                                <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Номер авто" Binding="{Binding OrderInfo_Number}"  Width="1.5*">
                         <DataGridTextColumn.HeaderStyle>
@@ -142,6 +197,12 @@
                                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.CellStyle>
+                            <Style>
+                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
+                                <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Время создания" Binding="{Binding OrderInfo_CreationDate}"  Width="2*">
                         <DataGridTextColumn.HeaderStyle>
@@ -149,6 +210,12 @@
                                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.CellStyle>
+                            <Style>
+                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
+                                <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Срок истечения" Binding="{Binding OrderInfo_EndingDate}" Width="2*">
                         <DataGridTextColumn.HeaderStyle>
@@ -156,6 +223,12 @@
                                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.CellStyle>
+                            <Style>
+                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
+                                <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
                     <DataGridTextColumn Header="Сумма" Binding="{Binding OrderInfo_Sum}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
@@ -163,6 +236,12 @@
                                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                             </Style>
                         </DataGridTextColumn.HeaderStyle>
+                        <DataGridTextColumn.CellStyle>
+                            <Style>
+                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
+                                <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>

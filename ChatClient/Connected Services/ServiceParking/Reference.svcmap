@@ -19,13 +19,12 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8301" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8301/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="f8bc15b7-7a06-4ebb-be60-f90fb492522b" SourceId="1" SourceUrl="http://localhost:8301/?disco" />
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="874c882b-080e-4144-818e-ded11c9a8386" SourceId="1" SourceUrl="http://localhost:8301/?xsd=xsd0" />
-    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="87af8e6b-dbd1-40ca-9578-08721cb9ab64" SourceId="1" SourceUrl="http://localhost:8301/?xsd=xsd1" />
-    <MetadataFile FileName="ServiceParking.wsdl" MetadataType="Wsdl" ID="352fb339-8ab8-4967-a20f-82a93ca1218d" SourceId="1" SourceUrl="http://localhost:8301/?wsdl" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="cd9e39e3-b9ec-4f13-8e51-064e72cbd052" SourceId="1" SourceUrl="http://localhost:8301/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="b2e0e251-db46-4f0d-b859-e854cbd65900" SourceId="1" SourceUrl="http://localhost:8301/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="ddf6b69d-4075-410f-b612-6f090554001e" SourceId="1" SourceUrl="http://localhost:8301/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

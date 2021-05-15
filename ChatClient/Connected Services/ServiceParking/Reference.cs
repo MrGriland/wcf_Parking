@@ -92,6 +92,18 @@ namespace ChatClient.ServiceParking {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/ClearNotification", ReplyAction="http://tempuri.org/IServiceParking/ClearNotificationResponse")]
         System.Threading.Tasks.Task<bool> ClearNotificationAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/ChangeConfirmed", ReplyAction="http://tempuri.org/IServiceParking/ChangeConfirmedResponse")]
+        bool ChangeConfirmed(int transport, string number, string creationdate, string endingdate, int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/ChangeConfirmed", ReplyAction="http://tempuri.org/IServiceParking/ChangeConfirmedResponse")]
+        System.Threading.Tasks.Task<bool> ChangeConfirmedAsync(int transport, string number, string creationdate, string endingdate, int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/DeleteUnconfirmed", ReplyAction="http://tempuri.org/IServiceParking/DeleteUnconfirmedResponse")]
+        bool DeleteUnconfirmed(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/DeleteUnconfirmed", ReplyAction="http://tempuri.org/IServiceParking/DeleteUnconfirmedResponse")]
+        System.Threading.Tasks.Task<bool> DeleteUnconfirmedAsync(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -237,6 +249,22 @@ namespace ChatClient.ServiceParking {
         
         public System.Threading.Tasks.Task<bool> ClearNotificationAsync(int id) {
             return base.Channel.ClearNotificationAsync(id);
+        }
+        
+        public bool ChangeConfirmed(int transport, string number, string creationdate, string endingdate, int id) {
+            return base.Channel.ChangeConfirmed(transport, number, creationdate, endingdate, id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ChangeConfirmedAsync(int transport, string number, string creationdate, string endingdate, int id) {
+            return base.Channel.ChangeConfirmedAsync(transport, number, creationdate, endingdate, id);
+        }
+        
+        public bool DeleteUnconfirmed(int id) {
+            return base.Channel.DeleteUnconfirmed(id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteUnconfirmedAsync(int id) {
+            return base.Channel.DeleteUnconfirmedAsync(id);
         }
     }
 }

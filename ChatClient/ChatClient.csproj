@@ -183,13 +183,13 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="ChatClient_TemporaryKey.pfx" />
-    <None Include="Connected Services\ServiceParking\item.xsd">
+    <None Include="Connected Services\ServiceParking\service.wsdl" />
+    <None Include="Connected Services\ServiceParking\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceParking\item1.xsd">
+    <None Include="Connected Services\ServiceParking\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ServiceParking\ServiceParking.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -216,9 +216,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ServiceParking\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\ServiceParking\item.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ServiceParking\configuration91.svcinfo" />

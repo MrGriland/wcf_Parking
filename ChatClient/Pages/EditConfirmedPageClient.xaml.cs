@@ -26,6 +26,8 @@ namespace ChatClient.Pages
         private object orderInfoObject;
         OrderInfo orderInfo;
         public int Transport;
+        string bdate;
+        string edate;
         public EditConfirmedPageClient(object sender, MainWindow mainWindow)
         {
             InitializeComponent();
@@ -35,11 +37,13 @@ namespace ChatClient.Pages
             MarkComboBox.ItemsSource = JsonConvert.DeserializeObject<List<string>>(mainWindow.LoadMarks());
             LoginInfo.Content = "Вы вошли как: " + mainWindow.login;
             CountInfo.Content = "Осталось мест: " + mainWindow.GetFreeCount();
+            orderInfo = (OrderInfo)orderInfoObject;
+            if (!orderInfo.OrderInfo_IsConfirmed)
+                DeleteButton.Visibility = Visibility.Visible;
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            orderInfo = (OrderInfo)orderInfoObject;
             MarkComboBox.Text = orderInfo.OrderInfo_TransportMark;
             ModelComboBox.ItemsSource = JsonConvert.DeserializeObject<List<string>>(mainWindow.LoadModels(MarkComboBox.SelectedItem.ToString()));
             ModelComboBox.IsEnabled = true;
@@ -55,7 +59,13 @@ namespace ChatClient.Pages
 
         private void ChangeButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (CheckDate())
+            {
+                string number = FPNumber.Text + SPNumber.Text + "-" + TPNumber.Text;
+                bdate = BDate.Text + " " + BTime.Text;
+                edate = Date.Text + " " + Time.Text;
+                mainWindow.TryUpdateConfirmed(Transport, number, bdate, edate, orderInfo.OrderInfo_ID);
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -156,6 +166,63 @@ namespace ChatClient.Pages
                 MessageBox.Show("Первая часть номера должна содержать цифры", "Неверный номер", MessageBoxButton.OK);
                 return false;
             }
+        }
+        public bool CheckDate()
+        {
+            if (BDate.Text != "")
+            {
+                if (BTime.Text != "")
+                {
+                    if (Date.Text != "")
+                    {
+                        if (Time.Text != "")
+                        {
+                            if ((Convert.ToDateTime(BDate.Text + " " + BTime.Text) - DateTime.Now).TotalMinutes > 0)
+                            {
+                                if ((Convert.ToDateTime(Date.Text + " " + Time.Text) - Convert.ToDateTime(BDate.Text + " " + BTime.Text)).TotalMinutes > 0)
+                                {
+                                    return true;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Вы не можете выехать раньше чем заехать", "Неправильная дата", MessageBoxButton.OK);
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Вам необходимо выбрать дату или время не из прошлого", "Неправильная дата", MessageBoxButton.OK);
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Выберите время выезда", "Неправильная дата", MessageBoxButton.OK);
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Выберите дату выезда", "Неправильная дата", MessageBoxButton.OK);
+                        return false;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Выберите время заезда", "Неправильная дата", MessageBoxButton.OK);
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите дату заезда", "Неправильная дата", MessageBoxButton.OK);
+                return false;
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.TryToDeleteUnconfirmed(orderInfo.OrderInfo_ID);
         }
     }
 }

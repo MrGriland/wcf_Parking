@@ -297,5 +297,35 @@ namespace ChatClient
             }
             catch { return false; }
         }
+        public void TryUpdateConfirmed(int transport, string number, string creationdate, string endingdate, int id)
+        {
+            try
+            {
+                if (isConnected && isLogged)
+                    if (client.ChangeConfirmed(transport, number, creationdate, endingdate, id))
+                        LoadClientMainPage();
+                    else
+                        MessageBox.Show("Возможно автомобиль с таким номером уже на парковке", "Не удалось изменить бронь", MessageBoxButton.OK);
+            }
+            catch
+            {
+                MessageBox.Show("Возможно автомобиль с таким номером уже на парковке", "Не удалось изменить бронь", MessageBoxButton.OK);
+            }
+        }
+        public void TryToDeleteUnconfirmed(int id)
+        {
+            try
+            {
+                if (isConnected && isLogged)
+                    if (client.DeleteUnconfirmed(id))
+                        LoadClientMainPage();
+                    else
+                        MessageBox.Show("Что-то пошло не так", "Не удалось отменить бронь", MessageBoxButton.OK);
+            }
+            catch
+            {
+                MessageBox.Show("Что-то пошло не так", "Не удалось отменить бронь", MessageBoxButton.OK);
+            }
+        }
     }
 }
