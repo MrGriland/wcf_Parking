@@ -104,6 +104,24 @@ namespace ChatClient.ServiceParking {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/DeleteUnconfirmed", ReplyAction="http://tempuri.org/IServiceParking/DeleteUnconfirmedResponse")]
         System.Threading.Tasks.Task<bool> DeleteUnconfirmedAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/IsAdmin", ReplyAction="http://tempuri.org/IServiceParking/IsAdminResponse")]
+        bool IsAdmin(string login);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/IsAdmin", ReplyAction="http://tempuri.org/IServiceParking/IsAdminResponse")]
+        System.Threading.Tasks.Task<bool> IsAdminAsync(string login);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/SendUsers", ReplyAction="http://tempuri.org/IServiceParking/SendUsersResponse")]
+        string SendUsers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/SendUsers", ReplyAction="http://tempuri.org/IServiceParking/SendUsersResponse")]
+        System.Threading.Tasks.Task<string> SendUsersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/TryToConfirm", ReplyAction="http://tempuri.org/IServiceParking/TryToConfirmResponse")]
+        bool TryToConfirm(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/TryToConfirm", ReplyAction="http://tempuri.org/IServiceParking/TryToConfirmResponse")]
+        System.Threading.Tasks.Task<bool> TryToConfirmAsync(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -265,6 +283,30 @@ namespace ChatClient.ServiceParking {
         
         public System.Threading.Tasks.Task<bool> DeleteUnconfirmedAsync(int id) {
             return base.Channel.DeleteUnconfirmedAsync(id);
+        }
+        
+        public bool IsAdmin(string login) {
+            return base.Channel.IsAdmin(login);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsAdminAsync(string login) {
+            return base.Channel.IsAdminAsync(login);
+        }
+        
+        public string SendUsers() {
+            return base.Channel.SendUsers();
+        }
+        
+        public System.Threading.Tasks.Task<string> SendUsersAsync() {
+            return base.Channel.SendUsersAsync();
+        }
+        
+        public bool TryToConfirm(int id) {
+            return base.Channel.TryToConfirm(id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> TryToConfirmAsync(int id) {
+            return base.Channel.TryToConfirmAsync(id);
         }
     }
 }

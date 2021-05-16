@@ -34,7 +34,10 @@ namespace ChatClient.Resources
             mainWindow.login = Tblogin.Text;
             mainWindow.UserID = mainWindow.GetID();
             if (mainWindow.isLogged)
-             mainWindow.LoadClientMainPage();
+                if (mainWindow.IsAdmin())
+                    mainWindow.LoadAdminMainPage();
+                else
+                    mainWindow.LoadClientMainPage();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

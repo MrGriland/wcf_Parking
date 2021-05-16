@@ -64,7 +64,14 @@ namespace ChatClient.Pages
                 string number = FPNumber.Text + SPNumber.Text + "-" + TPNumber.Text;
                 bdate = BDate.Text + " " + BTime.Text;
                 edate = Date.Text + " " + Time.Text;
-                mainWindow.TryUpdateConfirmed(Transport, number, bdate, edate, orderInfo.OrderInfo_ID);
+                MessageBoxResult response = MessageBox.Show("Вы уверены?", "Изменение брони", MessageBoxButton.YesNo);
+                switch (response)
+                {
+                    case MessageBoxResult.Yes:
+                        mainWindow.TryUpdateConfirmed(Transport, number, bdate, edate, orderInfo.OrderInfo_ID); break;
+                    case MessageBoxResult.No:
+                        break;
+                }
             }
         }
 
@@ -222,7 +229,14 @@ namespace ChatClient.Pages
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.TryToDeleteUnconfirmed(orderInfo.OrderInfo_ID);
+            MessageBoxResult response = MessageBox.Show("Вы уверены?", "Отмена брони", MessageBoxButton.YesNo);
+            switch (response)
+            {
+                case MessageBoxResult.Yes:
+                    mainWindow.TryToDeleteUnconfirmed(orderInfo.OrderInfo_ID); break;
+                case MessageBoxResult.No: 
+                    break;
+            }
         }
     }
 }

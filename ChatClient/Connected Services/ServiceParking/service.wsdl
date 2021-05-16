@@ -104,6 +104,24 @@
   <wsdl:message name="IServiceParking_DeleteUnconfirmed_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteUnconfirmedResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceParking_IsAdmin_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsAdmin" />
+  </wsdl:message>
+  <wsdl:message name="IServiceParking_IsAdmin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsAdminResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceParking_SendUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendUsers" />
+  </wsdl:message>
+  <wsdl:message name="IServiceParking_SendUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceParking_TryToConfirm_InputMessage">
+    <wsdl:part name="parameters" element="tns:TryToConfirm" />
+  </wsdl:message>
+  <wsdl:message name="IServiceParking_TryToConfirm_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TryToConfirmResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceParking_MsgCallback_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:MsgCallback" />
   </wsdl:message>
@@ -173,6 +191,18 @@
     <wsdl:operation name="DeleteUnconfirmed">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceParking/DeleteUnconfirmed" message="tns:IServiceParking_DeleteUnconfirmed_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceParking/DeleteUnconfirmedResponse" message="tns:IServiceParking_DeleteUnconfirmed_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsAdmin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceParking/IsAdmin" message="tns:IServiceParking_IsAdmin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceParking/IsAdminResponse" message="tns:IServiceParking_IsAdmin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceParking/SendUsers" message="tns:IServiceParking_SendUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceParking/SendUsersResponse" message="tns:IServiceParking_SendUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TryToConfirm">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceParking/TryToConfirm" message="tns:IServiceParking_TryToConfirm_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceParking/TryToConfirmResponse" message="tns:IServiceParking_TryToConfirm_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="MsgCallback">
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceParking/MsgCallback" message="tns:IServiceParking_MsgCallback_OutputCallbackMessage" />
@@ -315,6 +345,33 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteUnconfirmed">
       <soap12:operation soapAction="http://tempuri.org/IServiceParking/DeleteUnconfirmed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsAdmin">
+      <soap12:operation soapAction="http://tempuri.org/IServiceParking/IsAdmin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendUsers">
+      <soap12:operation soapAction="http://tempuri.org/IServiceParking/SendUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TryToConfirm">
+      <soap12:operation soapAction="http://tempuri.org/IServiceParking/TryToConfirm" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

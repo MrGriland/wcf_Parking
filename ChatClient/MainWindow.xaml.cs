@@ -79,6 +79,16 @@ namespace ChatClient
             MainGrid.Children.Clear();
             MainGrid.Children.Add(new NotificationsPage(this));
         }
+        public void LoadAdminMainPage()
+        {
+            MainGrid.Children.Clear();
+            MainGrid.Children.Add(new AdminMainPage(this));
+        }
+        public void LoadConfirmOrderPage()
+        {
+            MainGrid.Children.Clear();
+            MainGrid.Children.Add(new ConfirmOrderPage(this));
+        }
         public void ConnectUser()
         {
             if (!isConnected)
@@ -326,6 +336,43 @@ namespace ChatClient
             {
                 MessageBox.Show("Что-то пошло не так", "Не удалось отменить бронь", MessageBoxButton.OK);
             }
+        }
+        public bool IsAdmin()
+        {
+            if (isConnected && isLogged)
+            {
+                if (client.IsAdmin(login))
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
+        public string UpdateUsersData()
+        {
+            try
+            {
+                if (client != null && isConnected && isLogged)
+                {
+                    return client.SendUsers();
+                }
+                else
+                    return "";
+            }
+            catch { return ""; }
+        }
+        public void TryToConfirmOrder(int id)
+        {
+            if (isConnected && isLogged)
+            {
+                if (client.TryToConfirm(id))
+                    LoadAdminMainPage();
+                else
+                    MessageBox.Show("Что-то пошло не так", "Не удалось подтвердить бронь", MessageBoxButton.OK);
+            }
+            else
+                MessageBox.Show("Что-то пошло не так", "Не удалось подтвердить бронь", MessageBoxButton.OK);
         }
     }
 }

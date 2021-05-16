@@ -14,6 +14,7 @@ namespace ChatClient
         public string OrderInfo_TransportModel { get; set; }
         public string OrderInfo_Number { get; set; }
         public int OrderInfo_Creator { get; set; }
+        public string OrderInfo_CreatorLogin { get; set; }
         public string OrderInfo_CreationDate { get; set; }
         public string OrderInfo_EndingDate { get; set; }
         public double OrderInfo_Sum { get; set; }
