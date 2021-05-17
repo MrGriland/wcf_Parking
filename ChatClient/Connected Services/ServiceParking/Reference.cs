@@ -94,10 +94,10 @@ namespace ChatClient.ServiceParking {
         System.Threading.Tasks.Task<bool> ClearNotificationAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/ChangeConfirmed", ReplyAction="http://tempuri.org/IServiceParking/ChangeConfirmedResponse")]
-        bool ChangeConfirmed(int transport, string number, string creationdate, string endingdate, int id);
+        bool ChangeConfirmed(int transport, string number, string creationdate, string endingdate, bool isConfirmed, int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/ChangeConfirmed", ReplyAction="http://tempuri.org/IServiceParking/ChangeConfirmedResponse")]
-        System.Threading.Tasks.Task<bool> ChangeConfirmedAsync(int transport, string number, string creationdate, string endingdate, int id);
+        System.Threading.Tasks.Task<bool> ChangeConfirmedAsync(int transport, string number, string creationdate, string endingdate, bool isConfirmed, int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/DeleteUnconfirmed", ReplyAction="http://tempuri.org/IServiceParking/DeleteUnconfirmedResponse")]
         bool DeleteUnconfirmed(int id);
@@ -122,6 +122,18 @@ namespace ChatClient.ServiceParking {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/TryToConfirm", ReplyAction="http://tempuri.org/IServiceParking/TryToConfirmResponse")]
         System.Threading.Tasks.Task<bool> TryToConfirmAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/TryToAdmin", ReplyAction="http://tempuri.org/IServiceParking/TryToAdminResponse")]
+        bool TryToAdmin(bool isadmin, int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/TryToAdmin", ReplyAction="http://tempuri.org/IServiceParking/TryToAdminResponse")]
+        System.Threading.Tasks.Task<bool> TryToAdminAsync(bool isadmin, int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/TryToNotify", ReplyAction="http://tempuri.org/IServiceParking/TryToNotifyResponse")]
+        bool TryToNotify(string message, int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceParking/TryToNotify", ReplyAction="http://tempuri.org/IServiceParking/TryToNotifyResponse")]
+        System.Threading.Tasks.Task<bool> TryToNotifyAsync(string message, int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -269,12 +281,12 @@ namespace ChatClient.ServiceParking {
             return base.Channel.ClearNotificationAsync(id);
         }
         
-        public bool ChangeConfirmed(int transport, string number, string creationdate, string endingdate, int id) {
-            return base.Channel.ChangeConfirmed(transport, number, creationdate, endingdate, id);
+        public bool ChangeConfirmed(int transport, string number, string creationdate, string endingdate, bool isConfirmed, int id) {
+            return base.Channel.ChangeConfirmed(transport, number, creationdate, endingdate, isConfirmed, id);
         }
         
-        public System.Threading.Tasks.Task<bool> ChangeConfirmedAsync(int transport, string number, string creationdate, string endingdate, int id) {
-            return base.Channel.ChangeConfirmedAsync(transport, number, creationdate, endingdate, id);
+        public System.Threading.Tasks.Task<bool> ChangeConfirmedAsync(int transport, string number, string creationdate, string endingdate, bool isConfirmed, int id) {
+            return base.Channel.ChangeConfirmedAsync(transport, number, creationdate, endingdate, isConfirmed, id);
         }
         
         public bool DeleteUnconfirmed(int id) {
@@ -307,6 +319,22 @@ namespace ChatClient.ServiceParking {
         
         public System.Threading.Tasks.Task<bool> TryToConfirmAsync(int id) {
             return base.Channel.TryToConfirmAsync(id);
+        }
+        
+        public bool TryToAdmin(bool isadmin, int id) {
+            return base.Channel.TryToAdmin(isadmin, id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> TryToAdminAsync(bool isadmin, int id) {
+            return base.Channel.TryToAdminAsync(isadmin, id);
+        }
+        
+        public bool TryToNotify(string message, int id) {
+            return base.Channel.TryToNotify(message, id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> TryToNotifyAsync(string message, int id) {
+            return base.Channel.TryToNotifyAsync(message, id);
         }
     }
 }

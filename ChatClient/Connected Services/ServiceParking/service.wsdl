@@ -122,6 +122,18 @@
   <wsdl:message name="IServiceParking_TryToConfirm_OutputMessage">
     <wsdl:part name="parameters" element="tns:TryToConfirmResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceParking_TryToAdmin_InputMessage">
+    <wsdl:part name="parameters" element="tns:TryToAdmin" />
+  </wsdl:message>
+  <wsdl:message name="IServiceParking_TryToAdmin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TryToAdminResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceParking_TryToNotify_InputMessage">
+    <wsdl:part name="parameters" element="tns:TryToNotify" />
+  </wsdl:message>
+  <wsdl:message name="IServiceParking_TryToNotify_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TryToNotifyResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceParking_MsgCallback_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:MsgCallback" />
   </wsdl:message>
@@ -203,6 +215,14 @@
     <wsdl:operation name="TryToConfirm">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceParking/TryToConfirm" message="tns:IServiceParking_TryToConfirm_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceParking/TryToConfirmResponse" message="tns:IServiceParking_TryToConfirm_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TryToAdmin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceParking/TryToAdmin" message="tns:IServiceParking_TryToAdmin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceParking/TryToAdminResponse" message="tns:IServiceParking_TryToAdmin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TryToNotify">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceParking/TryToNotify" message="tns:IServiceParking_TryToNotify_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceParking/TryToNotifyResponse" message="tns:IServiceParking_TryToNotify_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="MsgCallback">
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceParking/MsgCallback" message="tns:IServiceParking_MsgCallback_OutputCallbackMessage" />
@@ -372,6 +392,24 @@
     </wsdl:operation>
     <wsdl:operation name="TryToConfirm">
       <soap12:operation soapAction="http://tempuri.org/IServiceParking/TryToConfirm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TryToAdmin">
+      <soap12:operation soapAction="http://tempuri.org/IServiceParking/TryToAdmin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TryToNotify">
+      <soap12:operation soapAction="http://tempuri.org/IServiceParking/TryToNotify" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

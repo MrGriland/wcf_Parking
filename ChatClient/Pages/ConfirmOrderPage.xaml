@@ -62,8 +62,8 @@
             <DataGrid Grid.Row="1" x:Name="MainGrid" AutoGenerateColumns="False" IsReadOnly="True" Foreground="Black">
                 <DataGrid.RowStyle>
                     <Style TargetType="{x:Type DataGridRow}">
-                        <!--<EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>-->
-                        <Setter Property="Height" Value="40"></Setter>
+                        <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                        <Setter Property="Height" Value="50"></Setter>
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>

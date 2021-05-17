@@ -61,6 +61,8 @@ namespace ChatClient.Pages
         }
         void Update()
         {
+            MainGrid.ItemsSource = searchconfirmedorders;
+            MainGridUsers.ItemsSource = searchusers;
             confirmedorders.Clear();
             orders = JsonConvert.DeserializeObject<List<OrderInfo>>(mainWindow.UpdateData());
             foreach (var item in orders)
@@ -76,7 +78,8 @@ namespace ChatClient.Pages
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            mainWindow.MainGrid.Children.Clear();
+            mainWindow.MainGrid.Children.Add(new EditAdminPage(sender, mainWindow));
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
@@ -134,6 +137,20 @@ namespace ChatClient.Pages
             MainGridUsers.ItemsSource = searchusers;
             Payment.Content = "Доход от зарегистрированной брони: " + PaySumSearched();
             OrderCount.Content = "Общее количество брони: " + OrderCountSumSearched();
+        }
+
+        private void UserCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            var rowIndex = Convert.ToInt32(MainGridUsers.SelectedIndex);
+            if (rowIndex >= 0)
+            {
+                var row = (UserInfo)MainGridUsers.Items[rowIndex];
+                if (comboBox.SelectedItem.ToString() == "System.Windows.Controls.ComboBoxItem: Администратор")
+                    mainWindow.TryToAdmin(true, row.UserInfo_ID);
+                else
+                    mainWindow.TryToAdmin(false, row.UserInfo_ID);
+            }
         }
     }
 }

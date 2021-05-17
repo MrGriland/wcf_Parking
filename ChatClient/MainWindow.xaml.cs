@@ -134,14 +134,14 @@ namespace ChatClient
         }
         public bool CheckLogin(string login)
         {
-            string pattern = @"\w{5,15}";
+            string pattern = @"\w{5,12}";
             if (Regex.IsMatch(login, pattern, RegexOptions.IgnoreCase))
             {
                 return true;
             }
             else
             {
-                MessageBox.Show("Логин должен состоять от 5 до 15 символов, иметь буквы или цифры", "Неверный логин", MessageBoxButton.OK);
+                MessageBox.Show("Логин должен состоять от 5 до 12 символов, иметь буквы или цифры", "Неверный логин", MessageBoxButton.OK);
                 return false;
             }
         }
@@ -307,13 +307,16 @@ namespace ChatClient
             }
             catch { return false; }
         }
-        public void TryUpdateConfirmed(int transport, string number, string creationdate, string endingdate, int id)
+        public void TryUpdateConfirmed(int transport, string number, string creationdate, string endingdate, bool isConfirmed,int id)
         {
             try
             {
                 if (isConnected && isLogged)
-                    if (client.ChangeConfirmed(transport, number, creationdate, endingdate, id))
-                        LoadClientMainPage();
+                    if (client.ChangeConfirmed(transport, number, creationdate, endingdate, isConfirmed, id))
+                        if (IsAdmin())
+                            LoadAdminMainPage();
+                        else
+                            LoadClientMainPage();
                     else
                         MessageBox.Show("Возможно автомобиль с таким номером уже на парковке", "Не удалось изменить бронь", MessageBoxButton.OK);
             }
@@ -328,7 +331,10 @@ namespace ChatClient
             {
                 if (isConnected && isLogged)
                     if (client.DeleteUnconfirmed(id))
-                        LoadClientMainPage();
+                        if (IsAdmin())
+                            LoadAdminMainPage();
+                        else
+                            LoadClientMainPage();
                     else
                         MessageBox.Show("Что-то пошло не так", "Не удалось отменить бронь", MessageBoxButton.OK);
             }
@@ -373,6 +379,32 @@ namespace ChatClient
             }
             else
                 MessageBox.Show("Что-то пошло не так", "Не удалось подтвердить бронь", MessageBoxButton.OK);
+        }
+        public void TryToAdmin(bool isadmin,int id)
+        {
+            if (isConnected && isLogged)
+            {
+                if (client.TryToAdmin(isadmin, id)) { }
+                else
+                    MessageBox.Show("Что-то пошло не так", "Не удалось изменить права", MessageBoxButton.OK);
+            }
+            else
+                MessageBox.Show("Что-то пошло не так", "Не удалось изменить права", MessageBoxButton.OK);
+        }
+        public void TryNotify(string message, int id)
+        {
+            try
+            {
+                if (isConnected && isLogged)
+                {
+                    if (client.TryToNotify(message, id)) { }
+                    else
+                        MessageBox.Show("Что-то пошло не так", "Не удалось оповестить пользователя", MessageBoxButton.OK);
+                }
+                else
+                    MessageBox.Show("Что-то пошло не так", "Не удалось оповестить пользователя", MessageBoxButton.OK);
+            }
+            catch { }
         }
     }
 }

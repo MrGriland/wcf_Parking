@@ -66,7 +66,7 @@
                 <DataGrid.RowStyle>
                     <Style TargetType="{x:Type DataGridRow}">
                         <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
-                        <Setter Property="Height" Value="30"></Setter>
+                        <Setter Property="Height" Value="50"></Setter>
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>
@@ -181,8 +181,7 @@
             <DataGrid Grid.Row="4" x:Name="MainGridUsers" AutoGenerateColumns="False" IsReadOnly="True" Foreground="Black">
                 <DataGrid.RowStyle>
                     <Style TargetType="{x:Type DataGridRow}">
-                        <!--<EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>-->
-                        <Setter Property="Height" Value="30"></Setter>
+                        <Setter Property="Height" Value="50"></Setter>
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>
@@ -238,19 +237,16 @@
                             </Style>
                         </DataGridTextColumn.CellStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Тип пользователя" Binding="{Binding UserInfo_IsAdmin}" Width="1.3*">
-                        <DataGridTextColumn.HeaderStyle>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="HorizontalContentAlignment" Value="Center" />
-                            </Style>
-                        </DataGridTextColumn.HeaderStyle>
-                        <DataGridTextColumn.CellStyle>
-                            <Style>
-                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"/>
-                                <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
-                            </Style>
-                        </DataGridTextColumn.CellStyle>
-                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Header="Тип пользователя" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox Name="UserCB" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="UserCB_SelectionChanged" Text="{Binding UserInfo_IsAdmin}">
+                                    <ComboBoxItem Content="Администратор"/>
+                                    <ComboBoxItem Content="Пользователь"/>
+                                </ComboBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Количество брони" Binding="{Binding UserInfo_Count}" Width="*">
                         <DataGridTextColumn.HeaderStyle>
                             <Style TargetType="DataGridColumnHeader">

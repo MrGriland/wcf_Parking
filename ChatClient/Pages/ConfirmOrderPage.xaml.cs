@@ -78,6 +78,7 @@ namespace ChatClient.Pages
         }
         void Update()
         {
+            MainGrid.ItemsSource = searchunconfirmedorders;
             unconfirmedorders.Clear();
             orders = JsonConvert.DeserializeObject<List<OrderInfo>>(mainWindow.UpdateData());
             foreach (var item in orders)
@@ -100,6 +101,12 @@ namespace ChatClient.Pages
             var rowIndex = Convert.ToInt32(MainGrid.SelectedIndex); 
             var row = (OrderInfo)MainGrid.Items[rowIndex];
             mainWindow.TryToConfirmOrder(row.OrderInfo_ID);
+        }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            mainWindow.MainGrid.Children.Clear();
+            mainWindow.MainGrid.Children.Add(new EditAdminPage(sender, mainWindow));
         }
     }
 }

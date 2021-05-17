@@ -118,6 +118,9 @@
     <Compile Include="Pages\ConfirmOrderPage.xaml.cs">
       <DependentUpon>ConfirmOrderPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EditAdminPage.xaml.cs">
+      <DependentUpon>EditAdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EditConfirmedPageClient.xaml.cs">
       <DependentUpon>EditConfirmedPageClient.xaml</DependentUpon>
     </Compile>
@@ -154,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ConfirmOrderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EditAdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

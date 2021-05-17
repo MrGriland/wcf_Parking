@@ -68,7 +68,7 @@ namespace ChatClient.Pages
                 switch (response)
                 {
                     case MessageBoxResult.Yes:
-                        mainWindow.TryUpdateConfirmed(Transport, number, bdate, edate, orderInfo.OrderInfo_ID); break;
+                        mainWindow.TryUpdateConfirmed(Transport, number, bdate, edate, false, orderInfo.OrderInfo_ID); break;
                     case MessageBoxResult.No:
                         break;
                 }
@@ -151,7 +151,7 @@ namespace ChatClient.Pages
                 string pattern2 = @"^[A-Z]{2}$";
                 if (Regex.IsMatch(SPNumber.Text, pattern2, RegexOptions.IgnoreCase))
                 {
-                    string pattern3 = @"\d{1}";
+                    string pattern3 = @"^[0-7]{1}";
                     if (Regex.IsMatch(TPNumber.Text, pattern3, RegexOptions.IgnoreCase))
                     {
                         return true;

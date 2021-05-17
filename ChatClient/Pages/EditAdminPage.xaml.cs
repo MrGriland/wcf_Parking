@@ -18,29 +18,28 @@ using System.Windows.Shapes;
 namespace ChatClient.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для AddOrderPage.xaml
+    /// Логика взаимодействия для EditAdminPage.xaml
     /// </summary>
-    public partial class AddOrderPage : UserControl
+    public partial class EditAdminPage : UserControl
     {
         MainWindow mainWindow;
-        public List<string> models = null;
+        private object orderInfoObject;
+        OrderInfo orderInfo;
         public int Transport;
         string bdate;
         string edate;
-        public AddOrderPage(MainWindow mainWindow)
+        public EditAdminPage(object sender, MainWindow mainWindow)
         {
             InitializeComponent();
+            var dataInRow = (DataGridRow)sender;
+            orderInfoObject = dataInRow.Item;
             this.mainWindow = mainWindow;
             MarkComboBox.ItemsSource = JsonConvert.DeserializeObject<List<string>>(mainWindow.LoadMarks());
             LoginInfo.Content = "Вы вошли как: " + mainWindow.login;
             CountInfo.Content = "Осталось мест: " + mainWindow.GetFreeCount();
-            BTime.Text = "";
-            Time.Text = "";
-        }
-        private void LogOutButton_Click(object sender, RoutedEventArgs e)
-        {
-            mainWindow.DisconnectUser();
-            mainWindow.LoadBeginPage();
+            orderInfo = (OrderInfo)orderInfoObject;
+            if (orderInfo.OrderInfo_IsConfirmed)
+                DeleteButton.Visibility = Visibility.Visible;
         }
 
         private void MarkComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -50,31 +49,41 @@ namespace ChatClient.Pages
             ModelComboBox.IsEnabled = true;
         }
 
-        private void OrderButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (CheckDate())
-            {
-                string number = FPNumber.Text + SPNumber.Text + "-" + TPNumber.Text;
-                bdate = BDate.Text + " " + BTime.Text;
-                edate = Date.Text + " " + Time.Text;
-                //DateTime rounded = new DateTime(((DateTime.Now.Ticks + 360000000) / 600000000) * 600000000);
-                if(mainWindow.GetFreeCount() > 0)
-                    mainWindow.TryToOrder(Transport, number, mainWindow.UserID, bdate, edate);
-                else
-                    MessageBox.Show("Подождите пожалуйста освобождения мест на парковке", "Нету свободных мест", MessageBoxButton.OK);
-            }
-        }
-
         private void ModelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(MarkComboBox.SelectedItem.ToString()!=null && ModelComboBox.SelectedItem != null)
+            if (MarkComboBox.SelectedItem.ToString() != null && ModelComboBox.SelectedItem != null)
                 Transport = mainWindow.GetTransportID(MarkComboBox.SelectedItem.ToString(), ModelComboBox.SelectedItem.ToString());
         }
 
         private void MainButton_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.LoadClientMainPage();
-            Transport = 0;
+            mainWindow.LoadAdminMainPage();
+        }
+
+        private void ConfirmOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.LoadConfirmOrderPage();
+        }
+
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.DisconnectUser();
+            mainWindow.LoadBeginPage();
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            MarkComboBox.Text = orderInfo.OrderInfo_TransportMark;
+            ModelComboBox.ItemsSource = JsonConvert.DeserializeObject<List<string>>(mainWindow.LoadModels(MarkComboBox.SelectedItem.ToString()));
+            ModelComboBox.IsEnabled = true;
+            ModelComboBox.Text = orderInfo.OrderInfo_TransportModel;
+            FPNumber.Text = orderInfo.OrderInfo_Number.Substring(0, 4);
+            SPNumber.Text = orderInfo.OrderInfo_Number.Substring(4, 2);
+            TPNumber.Text = orderInfo.OrderInfo_Number.Substring(7, 1);
+            BDate.Text = orderInfo.OrderInfo_CreationDate.Substring(0, 10);
+            BTime.Text = orderInfo.OrderInfo_CreationDate.Substring(11, 5);
+            Date.Text = orderInfo.OrderInfo_EndingDate.Substring(0, 10);
+            Time.Text = orderInfo.OrderInfo_EndingDate.Substring(11, 5);
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
@@ -82,6 +91,7 @@ namespace ChatClient.Pages
             if (CheckTransport() && CheckNumber())
             {
                 FPage.Visibility = Visibility.Collapsed;
+                NotifyPage.Visibility = Visibility.Collapsed;
                 SPage.Visibility = Visibility.Visible;
             }
         }
@@ -90,6 +100,37 @@ namespace ChatClient.Pages
         {
             FPage.Visibility = Visibility.Visible;
             SPage.Visibility = Visibility.Collapsed;
+            NotifyPage.Visibility = Visibility.Collapsed;
+        }
+
+        private void ChangeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CheckDate())
+            {
+                string number = FPNumber.Text + SPNumber.Text + "-" + TPNumber.Text;
+                bdate = BDate.Text + " " + BTime.Text;
+                edate = Date.Text + " " + Time.Text;
+                MessageBoxResult response = MessageBox.Show("Вы уверены?", "Изменение брони", MessageBoxButton.YesNo);
+                switch (response)
+                {
+                    case MessageBoxResult.Yes:
+                        mainWindow.TryUpdateConfirmed(Transport, number, bdate, edate, orderInfo.OrderInfo_IsConfirmed,orderInfo.OrderInfo_ID); break;
+                    case MessageBoxResult.No:
+                        break;
+                }
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult response = MessageBox.Show("Вы уверены?", "Отмена брони", MessageBoxButton.YesNo);
+            switch (response)
+            {
+                case MessageBoxResult.Yes:
+                    mainWindow.TryToDeleteUnconfirmed(orderInfo.OrderInfo_ID); break;
+                case MessageBoxResult.No:
+                    break;
+            }
         }
         public bool CheckTransport()
         {
@@ -152,7 +193,7 @@ namespace ChatClient.Pages
                     {
                         if (Time.Text != "")
                         {
-                            if((Convert.ToDateTime(BDate.Text + " " + BTime.Text) - DateTime.Now).TotalMinutes > 0)
+                            if ((Convert.ToDateTime(BDate.Text + " " + BTime.Text) - DateTime.Now).TotalMinutes > 0)
                             {
                                 if ((Convert.ToDateTime(Date.Text + " " + Time.Text) - Convert.ToDateTime(BDate.Text + " " + BTime.Text)).TotalMinutes > 0)
                                 {
@@ -195,9 +236,20 @@ namespace ChatClient.Pages
             }
         }
 
-        private void NotificationsButton_Click(object sender, RoutedEventArgs e)
+        private void NotifyButton_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.LoadClientNotificationsPage();
+            FPage.Visibility = Visibility.Collapsed;
+            SPage.Visibility = Visibility.Collapsed;
+            NotifyPage.Visibility = Visibility.Visible;
+        }
+
+        private void SendNotificationButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.TryNotify(NotificationTB.Text, orderInfo.OrderInfo_ID);
+            NotificationTB.Text = "";
+            FPage.Visibility = Visibility.Visible;
+            SPage.Visibility = Visibility.Collapsed;
+            NotifyPage.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -71,7 +71,7 @@
                 <DataGrid.RowStyle>
                     <Style TargetType="{x:Type DataGridRow}">
                         <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
-                        <Setter Property="Height" Value="30"></Setter>
+                        <Setter Property="Height" Value="50"></Setter>
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>
@@ -161,7 +161,7 @@
                 <DataGrid.RowStyle>
                     <Style TargetType="{x:Type DataGridRow}">
                         <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
-                        <Setter Property="Height" Value="30"></Setter>
+                        <Setter Property="Height" Value="50"></Setter>
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>

@@ -69,8 +69,11 @@ namespace ChatClient.Resources
         }
         void Update()
         {
+            MainGrid.ItemsSource = searchconfirmedorders;
+            MainGridNotConfirmed.ItemsSource = searchnotconfirmedorders;
             confirmedorders.Clear();
             notconfirmedorders.Clear();
+            orders.Clear();
             orders = JsonConvert.DeserializeObject<List<OrderInfo>>(mainWindow.UpdateData());
             foreach (var item in orders)
             {
