@@ -82,7 +82,7 @@
                     <Button Name="ChangeButton" Content="Изменить" Click="ChangeButton_Click" Background="#FF399393" Margin="20 0 0 0"/>
                 </StackPanel>
             </Grid>
-            <Button Name="DeleteButton"  Content="Отменить бронь" Click="DeleteButton_Click" Background="#FF399393" HorizontalAlignment="Right" Margin="0 10 10 0" VerticalAlignment="Top" Width="100"/>
+            <Button Name="DeleteButton" Visibility="Collapsed" Content="Отменить бронь" Click="DeleteButton_Click" Background="#FF399393" HorizontalAlignment="Right" Margin="0 10 10 0" VerticalAlignment="Top" Width="100"/>
         </Grid>
     </Grid>
 </UserControl>

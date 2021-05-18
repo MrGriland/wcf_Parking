@@ -116,7 +116,7 @@ namespace ChatClient.Pages
             string pattern1 = @"\d{4}";
             if (Regex.IsMatch(FPNumber.Text, pattern1, RegexOptions.IgnoreCase))
             {
-                string pattern2 = @"^[A-Z]{2}$";
+                string pattern2 = @"^[ABEIKMHOPCTX]{2}$";
                 if (Regex.IsMatch(SPNumber.Text, pattern2, RegexOptions.IgnoreCase))
                 {
                     string pattern3 = @"^[0-7]{1}";

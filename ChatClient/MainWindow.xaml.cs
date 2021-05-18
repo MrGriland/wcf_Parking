@@ -40,165 +40,237 @@ namespace ChatClient
         ServiceParkingClient client;
         public MainWindow()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch { }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            MainGrid.Children.Clear();
-            MainGrid.Children.Add(new BeginPage(this));
+            try
+            {
+                MainGrid.Children.Clear();
+                MainGrid.Children.Add(new BeginPage(this));
+            }
+            catch { }
         }
         public void LoadLoginPage()
         {
-            MainGrid.Children.Clear();
-            MainGrid.Children.Add(new LoginPage(this));
+            try
+            {
+                MainGrid.Children.Clear();
+                MainGrid.Children.Add(new LoginPage(this));
+            }
+            catch { }
         }
         public void LoadRegisterPage()
         {
-            MainGrid.Children.Clear();
-            MainGrid.Children.Add(new RegisterPage(this));
+            try
+            {
+                MainGrid.Children.Clear();
+                MainGrid.Children.Add(new RegisterPage(this));
+            }
+            catch { }
         }
         public void LoadBeginPage()
         {
-            MainGrid.Children.Clear();
-            MainGrid.Children.Add(new BeginPage(this));
+            try
+            {
+                MainGrid.Children.Clear();
+                MainGrid.Children.Add(new BeginPage(this));
+            }
+            catch { }
         }
         public void LoadClientMainPage()
         {
-            MainGrid.Children.Clear();
-            MainGrid.Children.Add(new ClientMainPage(this));
+            try
+            {
+                MainGrid.Children.Clear();
+                MainGrid.Children.Add(new ClientMainPage(this));
+            }
+            catch { }
         }
         public void LoadClientAddOrderPage()
         {
-            LoadMarks();
-            MainGrid.Children.Clear();
-            MainGrid.Children.Add(new AddOrderPage(this));
+            try
+            {
+                LoadMarks();
+                MainGrid.Children.Clear();
+                MainGrid.Children.Add(new AddOrderPage(this));
+            }
+            catch { }
         }
         public void LoadClientNotificationsPage()
         {
-            MainGrid.Children.Clear();
-            MainGrid.Children.Add(new NotificationsPage(this));
+            try
+            {
+                MainGrid.Children.Clear();
+                MainGrid.Children.Add(new NotificationsPage(this));
+            }
+            catch { }
         }
         public void LoadAdminMainPage()
         {
-            MainGrid.Children.Clear();
-            MainGrid.Children.Add(new AdminMainPage(this));
+            try
+            {
+                MainGrid.Children.Clear();
+                MainGrid.Children.Add(new AdminMainPage(this));
+            }
+            catch { }
         }
         public void LoadConfirmOrderPage()
         {
-            MainGrid.Children.Clear();
-            MainGrid.Children.Add(new ConfirmOrderPage(this));
+            try
+            {
+                MainGrid.Children.Clear();
+                MainGrid.Children.Add(new ConfirmOrderPage(this));
+            }
+            catch { }
         }
         public void ConnectUser()
         {
-            if (!isConnected)
+            try
             {
                 if (!isConnected)
                 {
-                    try
+                    if (!isConnected)
                     {
-                        client = new ServiceParkingClient(new System.ServiceModel.InstanceContext(this));
-                        client.Connect();
+                        try
+                        {
+                            client = new ServiceParkingClient(new System.ServiceModel.InstanceContext(this));
+                            client.Connect();
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Не удалось подключиться к серверу", "Что-то пошло не так", MessageBoxButton.OK);
+                            return;
+                        }
                     }
-                    catch
-                    {
-                        MessageBox.Show("Не удалось подключиться к серверу", "Что-то пошло не так", MessageBoxButton.OK);
-                        return;
-                    }
+                    UpdateData();
+                    isConnected = true;
                 }
-                UpdateData();
-                isConnected = true;
             }
+            catch { }
         }
         public void TryToLogin(string login, string password)
         {
-            if (isConnected && client!=null)
+            try
             {
-                if (client.TryLogin(login, GetHash(password)))
+                if (isConnected && client != null)
                 {
-                    isLogged = true;
+                    if (client.TryLogin(login, GetHash(password)))
+                    {
+                        isLogged = true;
+                    }
+                    else
+                        MessageBox.Show("Неверный логин или пароль", "Проверьте логин или пароль", MessageBoxButton.OK);
                 }
-                else
-                    MessageBox.Show("Неверный логин или пароль", "Проверьте логин или пароль", MessageBoxButton.OK);
             }
+            catch { }
         }
         public void TryToRegister(string login, string password, string name, string surname)
         {
-            if (isConnected && client != null && CheckLogin(login) && CheckPassword(password) && CheckName(name) && CheckSurname(surname))
+            try
             {
-                if (client.TryRegister(login, GetHash(password), name, surname))
-                    LoadBeginPage();
-                else
-                    MessageBox.Show("Возможно пользователь с таким логином уже зарегистрирован", "Не удалось зарегистрировать пользователя", MessageBoxButton.OK);
+                if (isConnected && client != null && CheckLogin(login) && CheckPassword(password) && CheckName(name) && CheckSurname(surname))
+                {
+                    if (client.TryRegister(login, GetHash(password), name, surname))
+                        LoadBeginPage();
+                    else
+                        MessageBox.Show("Возможно пользователь с таким логином уже зарегистрирован", "Не удалось зарегистрировать пользователя", MessageBoxButton.OK);
+                }
             }
+            catch { }
         }
         public bool CheckLogin(string login)
         {
-            string pattern = @"\w{5,12}";
-            if (Regex.IsMatch(login, pattern, RegexOptions.IgnoreCase))
+            try
             {
-                return true;
+                string pattern = @"[a-zA-Z0-9]{" + login.Length + "}";
+                if (Regex.IsMatch(login, pattern, RegexOptions.IgnoreCase) && login.Length > 4)
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Логин должен состоять от 5 до 12 символов, иметь буквы или цифры", "Неверный логин", MessageBoxButton.OK);
+                    return false;
+                }
             }
-            else
-            {
-                MessageBox.Show("Логин должен состоять от 5 до 12 символов, иметь буквы или цифры", "Неверный логин", MessageBoxButton.OK);
-                return false;
-            }
+            catch { return false; }
         }
         public bool CheckPassword(string password)
         {
-            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$";
-            if (Regex.IsMatch(password, pattern, RegexOptions.IgnoreCase))
+            try
             {
-                return true;
+                string pattern = @"[a-zA-Z0-9]{" + password.Length + "}";
+                if (Regex.IsMatch(password, pattern, RegexOptions.IgnoreCase) && password.Length > 7)
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Пароль должен состоять от 8 до 15 символов, иметь буквы или цифры", "Неверный пароль", MessageBoxButton.OK);
+                    return false;
+                }
             }
-            else
-            {
-                MessageBox.Show("Пароль должен состоять от 8 до 15 символов, иметь буквы и цифры", "Неверный пароль", MessageBoxButton.OK);
-                return false;
-            }
+            catch { return false; }
         }
         public bool CheckName(string name)
         {
-            string pattern = @"^[А-Яа-я]{2,30}$";
-            if (Regex.IsMatch(name, pattern, RegexOptions.IgnoreCase))
+            try
             {
-                return true;
+                string pattern = @"^[А-Яа-я]{2,30}$";
+                if (Regex.IsMatch(name, pattern, RegexOptions.IgnoreCase))
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Имя должно состоять от 2 до 30 символов, иметь буквы", "Неверное имя", MessageBoxButton.OK);
+                    return false;
+                }
             }
-            else
-            {
-                MessageBox.Show("Имя должно состоять от 2 до 30 символов, иметь буквы", "Неверное имя", MessageBoxButton.OK);
-                return false;
-            }
+            catch { return false; }
         }
         public bool CheckSurname(string surname)
         {
-            string pattern = @"^[А-Яа-я]{2,30}$";
-            if (Regex.IsMatch(surname, pattern, RegexOptions.IgnoreCase))
+            try
             {
-                return true;
+                string pattern = @"^[А-Яа-я]{2,30}$";
+                if (Regex.IsMatch(surname, pattern, RegexOptions.IgnoreCase))
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Фамилия должна состоять от 2 до 30 символов, иметь буквы", "Неверная фамилия", MessageBoxButton.OK);
+                    return false;
+                }
             }
-            else
-            {
-                MessageBox.Show("Фамилия должна состоять от 2 до 30 символов, иметь буквы", "Неверная фамилия", MessageBoxButton.OK);
-                return false;
-            }
+            catch { return false; }
         }
         public void DisconnectUser()
         {
-            isLogged = false;
-            login = null;
-            orderInfos = null;
-            if (isConnected)
+            try
             {
-                try
+                isLogged = false;
+                login = null;
+                orderInfos = null;
+                if (isConnected)
                 {
-                    client.Disconnect();
+                    try
+                    {
+                        client.Disconnect();
+                    }
+                    catch { }
+                    client = null;
+                    isConnected = false;
                 }
-                catch { }
-                client = null;
-                isConnected = false;
             }
+            catch { }
         }
         public string UpdateData()
         {
@@ -216,13 +288,21 @@ namespace ChatClient
 
         public void MsgCallback(string msg)
         {
-            freec = msg;
+            try
+            {
+                freec = msg;
+            }
+            catch { }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (isConnected)
-                DisconnectUser();
+            try
+            {
+                if (isConnected)
+                    DisconnectUser();
+            }
+            catch { }
         }
         public string LoadMarks()
         {
@@ -237,64 +317,100 @@ namespace ChatClient
         }
         public string LoadModels(string mark)
         {
-            if (isConnected && isLogged)
-                return client.SendModels(mark);
-            else
-                return "";
+            try
+            {
+                if (isConnected && isLogged)
+                    return client.SendModels(mark);
+                else
+                    return "";
+            }
+            catch { return ""; }
         }
         public int GetID()
         {
-            if (isConnected && isLogged)
-                return client.GetUserID(login);
-            else
-                return 0;
+            try
+            {
+                if (isConnected && isLogged)
+                    return client.GetUserID(login);
+                else
+                    return 0;
+            }
+            catch { return 0; }
         }
         public int GetTransportID(string mark, string model)
         {
-            if (isConnected && isLogged)
-                return client.GetTransport(mark, model);
-            else
-                return 0;
+            try
+            {
+                if (isConnected && isLogged)
+                    return client.GetTransport(mark, model);
+                else
+                    return 0;
+            }
+            catch { return 0; }
         }
         public void TryToOrder(int transport, string number, int creator, string creationdate, string endingdate)
         {
-            if (isConnected && client != null)
+            try
             {
-                if (client.TryOrder(transport, number, creator, creationdate, endingdate))
-                    LoadClientMainPage();
-                else
-                    MessageBox.Show("Возможно автомобиль с таким номером уже на парковке", "Не удалось забронировать", MessageBoxButton.OK);
+                if (isConnected && client != null)
+                {
+                    if (client.TryOrder(transport, number, creator, creationdate, endingdate))
+                        LoadClientMainPage();
+                    else
+                        MessageBox.Show("Возможно автомобиль с таким номером уже на парковке", "Не удалось забронировать", MessageBoxButton.OK);
+                }
             }
+            catch { }
         }
         public void MarksCallback(string msg)
         {
-            marks = null;
-            marks = JsonConvert.DeserializeObject<List<string>>(msg);
+            try
+            {
+                marks = null;
+                marks = JsonConvert.DeserializeObject<List<string>>(msg);
+            }
+            catch { }
         }
         public void ModelsCallback(string msg)
         {
-            models = null;
-            models = JsonConvert.DeserializeObject<List<string>>(msg);
+            try
+            {
+                models = null;
+                models = JsonConvert.DeserializeObject<List<string>>(msg);
+            }
+            catch { }
         }
         public string GetHash(string input)
         {
-            var md5 = MD5.Create();
-            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
-            return Convert.ToBase64String(hash);
+            try
+            {
+                var md5 = MD5.Create();
+                var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
+                return Convert.ToBase64String(hash);
+            }
+            catch { return ""; }
         }
         public int GetFreeCount()
         {
-            if (isConnected && isLogged)
-                return client.GetCount();
-            else
-                return 0;
+            try
+            {
+                if (isConnected && isLogged)
+                    return client.GetCount();
+                else
+                    return 0;
+            }
+            catch { return 0; }
         }
         public string GetNotifications(string login)
         {
-            if (isConnected && isLogged)
-                return client.SendNotifications(login);
-            else
-                return "";
+            try
+            {
+                if (isConnected && isLogged)
+                    return client.SendNotifications(login);
+                else
+                    return "";
+            }
+            catch { return ""; }
         }
         public bool ClearThisNotification(int id)
         {
@@ -345,15 +461,19 @@ namespace ChatClient
         }
         public bool IsAdmin()
         {
-            if (isConnected && isLogged)
+            try
             {
-                if (client.IsAdmin(login))
-                    return true;
+                if (isConnected && isLogged)
+                {
+                    if (client.IsAdmin(login))
+                        return true;
+                    else
+                        return false;
+                }
                 else
                     return false;
             }
-            else
-                return false;
+            catch { return false; }
         }
         public string UpdateUsersData()
         {
@@ -370,26 +490,34 @@ namespace ChatClient
         }
         public void TryToConfirmOrder(int id)
         {
-            if (isConnected && isLogged)
+            try
             {
-                if (client.TryToConfirm(id))
-                    LoadAdminMainPage();
+                if (isConnected && isLogged)
+                {
+                    if (client.TryToConfirm(id))
+                        LoadAdminMainPage();
+                    else
+                        MessageBox.Show("Что-то пошло не так", "Не удалось подтвердить бронь", MessageBoxButton.OK);
+                }
                 else
                     MessageBox.Show("Что-то пошло не так", "Не удалось подтвердить бронь", MessageBoxButton.OK);
             }
-            else
-                MessageBox.Show("Что-то пошло не так", "Не удалось подтвердить бронь", MessageBoxButton.OK);
+            catch { }
         }
         public void TryToAdmin(bool isadmin,int id)
         {
-            if (isConnected && isLogged)
+            try
             {
-                if (client.TryToAdmin(isadmin, id)) { }
+                if (isConnected && isLogged)
+                {
+                    if (client.TryToAdmin(isadmin, id)) { }
+                    else
+                        MessageBox.Show("Что-то пошло не так", "Не удалось изменить права", MessageBoxButton.OK);
+                }
                 else
                     MessageBox.Show("Что-то пошло не так", "Не удалось изменить права", MessageBoxButton.OK);
             }
-            else
-                MessageBox.Show("Что-то пошло не так", "Не удалось изменить права", MessageBoxButton.OK);
+            catch { }
         }
         public void TryNotify(string message, int id)
         {
